@@ -1,0 +1,251 @@
+ /* ====== SCOPE: Portfolio ====== */
+ :root {
+   /* assumes your global vars exist; these are just fallbacks */
+   --bg: #0b1020;
+   --bg-2: #0f1530;
+   --card: #121935;
+   --muted: #a7b0d3;
+   --text: #e8edff;
+   --white: #fff;
+   --brand: #5b86ff;
+   --brand-2: #8e78ff;
+   --accent: linear-gradient(135deg, var(--brand), var(--brand-2));
+   --radius: 18px;
+   --shadow: 0 10px 24px rgba(0, 0, 0, .35);
+   --container: 1200px;
+ }
+
+ .ra-card {
+   margin: 30px 0;
+ }
+
+ .ra {
+   max-width: 1200px;
+   margin: 0 auto;
+   
+   /* 👉 দুই পাশে space */
+ }
+
+ .ra-portfolio-hero .ra-portfolio-hero-inner {
+   display: grid;
+   grid-template-columns: 1.2fr 1fr;
+   gap: clamp(18px, 4vw, 32px);
+   padding: clamp(18px, 4vw, 28px);
+   position: relative;
+   overflow: hidden;
+   background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .02));
+   border: 1px solid rgba(255, 255, 255, .08);
+   border-radius: var(--radius);
+ }
+
+ .ra-portfolio-hero-art {
+   min-height: 220px;
+   border-radius: calc(var(--radius) - 6px);
+   background:
+     radial-gradient(600px 300px at 90% -20%, rgba(91, 134, 255, .25), transparent 55%),
+     radial-gradient(520px 260px at -30% 40%, rgba(142, 120, 255, .25), transparent 55%),
+     var(--bg-2);
+   border: 1px solid rgba(255, 255, 255, .06);
+ }
+
+ .ra-portfolio-hero-badges {
+   display: flex;
+   gap: 10px;
+   flex-wrap: wrap;
+   margin-top: 12px;
+ }
+
+ /* Controls */
+ .ra-portfolio-actions {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   flex-wrap: wrap;
+ }
+
+ .ra-portfolio-tabs {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 8px;
+ }
+
+ .ra-tab {
+   padding: .55rem .9rem;
+   border-radius: 999px;
+   border: 1px solid rgba(255, 255, 255, .14);
+   background: rgba(255, 255, 255, .03);
+   color: var(--text);
+   font-weight: 700;
+   cursor: pointer;
+ }
+
+ .ra-tab.is-active {
+   background: var(--accent);
+   color: var(--white);
+   border-color: transparent;
+ }
+
+ /* Grid */
+ .ra-portfolio-grid {
+   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+   gap: 1.25rem;
+ }
+
+ /* Card */
+ .ra-portfolio-card {
+   display: grid;
+   grid-template-rows: 180px auto auto;
+   background: rgba(255, 255, 255, 0.04);
+   border: 1px solid rgba(255, 255, 255, 0.10);
+   border-radius: 16px;
+   overflow: hidden;
+   position: relative;
+   transition: transform .3s ease, box-shadow .3s ease;
+ }
+
+ .ra-portfolio-card:hover {
+   transform: translateY(-6px);
+   box-shadow: 0 12px 28px rgba(0, 0, 0, .35);
+ }
+
+ /* Glow border */
+ .ra-portfolio-card::before {
+   content: "";
+   position: absolute;
+   inset: 0;
+   border-radius: 16px;
+   padding: 1.5px;
+   background: linear-gradient(135deg, #6366f1, #22d3ee, #a855f7);
+   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+   -webkit-mask-composite: xor;
+   mask-composite: exclude;
+   pointer-events: none;
+   opacity: .6;
+ }
+
+ .ra-portfolio-thumb {
+   background: var(--card) center/cover no-repeat;
+   background-image: var(--img);
+ }
+
+ .ra-portfolio-body {
+   padding: 14px 16px;
+   display: grid;
+   gap: 6px;
+ }
+
+ .ra-tags {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 8px;
+ }
+
+ .ra-tag {
+   padding: .35rem .6rem;
+   border-radius: 999px;
+   border: 1px solid rgba(255, 255, 255, .14);
+   color: var(--muted);
+   font-size: .78rem;
+ }
+
+ .ra-portfolio-actions-row {
+   display: flex;
+   gap: 10px;
+   padding: 0 16px 16px;
+   flex-wrap: wrap;
+ }
+
+ .ra-btn.sm {
+   padding: .6rem .9rem;
+   font-weight: 700;
+   font-size: .95rem;
+ }
+
+ /* Modal */
+ .ra-portfolio-modal {
+   position: fixed;
+   inset: 0;
+   display: none;
+   z-index: 60;
+ }
+
+ .ra-portfolio-modal.is-open {
+   display: block;
+ }
+
+ .ra-portfolio-modal-backdrop {
+   position: absolute;
+   inset: 0;
+   background: rgba(0, 0, 0, .55);
+   backdrop-filter: blur(2px);
+ }
+
+ .ra-portfolio-modal-dialog {
+   position: relative;
+   z-index: 1;
+   max-width: min(1000px, 92vw);
+   margin: 6vh auto;
+   padding: 18px;
+   background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .03));
+   border: 1px solid rgba(255, 255, 255, .12);
+   border-radius: 16px;
+   box-shadow: var(--shadow);
+ }
+
+ .ra-portfolio-modal-close {
+   position: absolute;
+   top: 10px;
+   right: 12px;
+   width: 36px;
+   height: 36px;
+   border-radius: 10px;
+   border: 1px solid rgba(255, 255, 255, .18);
+   background: transparent;
+   color: var(--text);
+   font-size: 22px;
+   cursor: pointer;
+ }
+
+ .ra-portfolio-gallery {
+   display: grid;
+   gap: 12px;
+   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+   margin-top: 12px;
+ }
+
+ .ra-portfolio-gallery img {
+   width: 100%;
+   height: 220px;
+   object-fit: cover;
+   border-radius: 12px;
+   border: 1px solid rgba(255, 255, 255, .10);
+ }
+
+ /* Inputs reuse */
+ .ra-search {
+   background: rgba(255, 255, 255, .06);
+   border: 1px solid rgba(255, 255, 255, .12);
+   padding: .75rem 1rem;
+   border-radius: 12px;
+   color: var(--text);
+   min-width: min(100%, 260px);
+ }
+
+ /* Responsive tweaks */
+ @media (max-width: 980px) {
+   .ra-portfolio-hero .ra-portfolio-hero-inner {
+     grid-template-columns: 1fr;
+   }
+ }
+
+ @media (max-width: 576px) {
+   .ra-container {
+     padding: 0 1rem;
+   }
+
+   /* দুই পাশে যথেষ্ট gap */
+   .ra-portfolio-grid {
+     grid-template-columns: 1fr;
+     gap: 1rem;
+   }
+ }

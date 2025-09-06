@@ -1,0 +1,100 @@
+/* Container */
+.ra-container {
+  max-width: 1200px;   /* container width limit */
+  margin: 0 auto;      /* center align */
+  padding: 0 2rem;     /* দুইপাশে gap */
+  box-sizing: border-box;
+}
+
+/* Responsive Grid */
+.ra-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+.ra-padding-tp{
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.ra-padding-top{
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+/* Service Cards - Light Section */
+.ra-service-card {
+  border-radius: 16px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.05);   /* Light bg */
+  position: relative;
+  text-align: center;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.ra-service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* Border Glow Effect */
+.ra-service-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 2px;
+  background: linear-gradient(135deg, #6366f1, #22d3ee, #a855f7);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Dark Mode Cards */
+.ra-dark .ra-service-card {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+.ra-dark .ra-service-card:hover {
+  box-shadow: 0 0 20px rgba(99,102,241,0.6);
+}
+
+/* Icon */
+.ra-service-icon.circle {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  border-radius: 50%;
+  background: var(--brand, #6366f1);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+/* Container */
+.ra-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+/* Responsive Grid */
+.ra-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Mobile Optimization */
+@media (max-width: 576px) {
+  .ra-container {
+    padding: 0 1rem; /* ছোট screen এ কম padding */
+  }
+  .ra-grid {
+    grid-template-columns: 1fr; /* সব card এক কলামে */
+    gap: 1rem;
+  }
+}

@@ -1,0 +1,52 @@
+/* Container */
+.ra-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 16px;   /* 👉 দুই পাশে space */
+}
+
+/* GRID SYSTEM */
+.ra-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* GRID SYSTEM (reusable) */
+.ra-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* Career Card */
+.ra-career-card {
+  background: rgba(255, 255, 255, 0.04);  /* হালকা ট্রান্সপারেন্ট */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.ra-career-card:hover {
+  background: linear-gradient(180deg, rgba(91,134,255,0.15), rgba(142,120,255,0.1));
+  transform: translateY(-6px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.45);
+}
+
+.ra-career-icon {
+  font-size: 2.5rem;
+  margin-bottom: 14px;
+  display: inline-block;
+  background: var(--accent, #2563eb);
+  color: var(--white, #fff);
+  padding: 16px;
+  border-radius: 50%;
+  box-shadow: var(--shadow, 0 4px 12px rgba(0,0,0,0.1));
+}
+
+.ra-h3 {
+  font-size: clamp(18px, 2.8vw, 22px);
+  margin: 0 0 8px;
+}
