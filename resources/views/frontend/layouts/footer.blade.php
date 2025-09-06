@@ -1,5 +1,5 @@
 <footer>
-    <link rel="stylesheet" href="{{ asset('frontend/css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/footer.css') }}">
     <div class="container section" style="padding-bottom:0px">
         <div class="footer-grid">
             <div>
