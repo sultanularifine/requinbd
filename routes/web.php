@@ -11,6 +11,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\InternController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DirectorController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -96,6 +97,11 @@ Route::prefix('admin')->middleware(['auth', 'role:executive'])->group(function (
         Route::resource('certificates', CertificateController::class);
         Route::resource('executive_members', ExecutiveMemberController::class);
     });
+
+    Route::prefix('admin')->name('admin.')->group(function () {
+       Route::resource('directors', DirectorController::class);
+    });
+
 });
 
 
@@ -111,4 +117,5 @@ Route::prefix('/')->group(function () {
     Route::get('/articles/view', [PageController::class, 'articles_view'])->name('articles.view');
     Route::get('/career', [PageController::class, 'career'])->name('career');
     Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+    Route::get('/internship', [PageController::class, 'internshipForm'])->name('internship.form');
 });

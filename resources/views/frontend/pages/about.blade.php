@@ -71,10 +71,10 @@
     <!-- Executives -->
     <div id="executives" class="tab-content active d-flex flex-wrap fade-in-unique" style="gap:20px;">
         @foreach($members as $member)
-            <div class="card team-card-unique" style="width:220px; text-align:center; border:1px solid #ddd; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+            <div class="card team-card-unique" >
                 <img src="{{ asset($member->photo) }}" 
                     alt="{{ $member->name }}" 
-                    style="width:100%; height:200px; object-fit:cover;">
+                    style="width:100%;  object-fit:cover;">
                 <div class="name" style="font-weight:bold; margin-top:10px;">
                     {{ $member->name }}
                 </div>
@@ -85,29 +85,24 @@
         @endforeach
     </div>
 
-    <!-- Directors -->
-    <div id="directors" class="tab-content fade-in-unique">
+ 
+ <!-- Directors -->
+<div id="directors" class="tab-content fade-in-unique d-flex flex-wrap" style="gap:20px;">
+    @foreach($directors as $director)
         <div class="card team-card-unique">
-            <img src="" alt="John Smith">
-            <div class="name">John Smith</div>
-            <div class="role">Director</div>
+            <img src="{{ $director->photo ? asset($director->photo) : 'https://via.placeholder.com/300x300' }}" 
+                 alt="{{ $director->name }}" 
+                 style="width:100%; object-fit:cover;">
+            <div class="name" style="font-weight:bold; margin-top:10px;">
+                {{ $director->name }}
+            </div>
+            <div class="role" style="color:#555; margin-bottom:10px;">
+                {{ $director->designation }}
+            </div>
         </div>
-        <div class="card team-card-unique">
-            <img src="" alt="Jane Doe">
-            <div class="name">Jane Doe</div>
-            <div class="role">Director</div>
-        </div>
-        <div class="card team-card-unique">
-            <img src="" alt="John Smith">
-            <div class="name">John Smith</div>
-            <div class="role">Director</div>
-        </div>
-        <div class="card team-card-unique">
-            <img src="" alt="Jane Doe">
-            <div class="name">Jane Doe</div>
-            <div class="role">Director</div>
-        </div>
-    </div>
+    @endforeach
+</div>
+
 
     <!-- Animation + Slideshow Script -->
     <style>

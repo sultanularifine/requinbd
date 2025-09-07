@@ -74,7 +74,18 @@
                     </li>
                 </ul>
             </li>
-{{-- @endrole --}}
+            {{-- @endrole --}}
+            <li class="nav-item dropdown {{ Request::routeIs('directors.*') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fa-solid fa-user-tie"></i> <span>Directors</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::routeIs('directors.index') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('admin.directors.index') }}">Director List</a>
+                    </li>
+                </ul>
+            </li>
+
         </ul>
         <div class="hide-sidebar-mini mt-4 mb-4 p-3">
             <form id="logout-form" action="{{ route('logout') }}" method="POST">

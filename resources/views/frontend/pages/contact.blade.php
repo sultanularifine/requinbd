@@ -42,7 +42,7 @@
             <div class="ra-section-header anim-fade-slide anim-delay-1">
                 <div class="ra-eyebrow">Get in Touch</div>
                 <h2 class="ra-h2">Contact Us</h2>
-                <p class="ra-lead">Reach out to us for projects, services, or any other inquiries.।</p>
+                <p class="ra-lead">Reach out to us for projects, services, or any other inquiries.</p>
             </div>
 
             <div class="ra-grid contact-grid">

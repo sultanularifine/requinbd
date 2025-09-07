@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Articles - Requin BD')
+@section('title', 'Career - Requin BD')
 @push('styles')
     <link rel="stylesheet" href="{{ asset('frontend/css/style.career.css') }}">
     <style>
@@ -26,22 +26,60 @@
       .anim-delay-1 { animation-delay: 0.2s; }
       .anim-delay-2 { animation-delay: 0.4s; }
       .anim-delay-3 { animation-delay: 0.6s; }
+
+      /* Apply Now Button */
+  .apply-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #E9692C;
+    color: #fff;
+    padding: 6px 14px;          /* smaller size */
+    font-size: 14px;            /* smaller font */
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    box-shadow: 0 0 10px #fd5f16;
+    animation: glow 1.5s infinite alternate;
+}
+
+.apply-btn:hover {
+    background-color: #ca4f16;
+    box-shadow: 0 0 20px #ff5203;
+}
+
+/* Glowing animation */
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 5px rgba(233,105,44,0.5), 0 0 10px rgba(233,105,44,0.3);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(233,105,44,0.7), 0 0 25px rgba(233,105,44,0.5);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(233,105,44,0.6), 0 0 20px rgba(233,105,44,0.4);
+    }
+}
+
+
     </style>
 @endpush
-@section('meta_description', 'Custom IT services for startups & SMBs.')
 
-@push('styles')
-@endpush
+@section('meta_description', 'Career opportunities and internships for IT courses at Requin BD.')
 
 @section('content')
 
-<section id="career" class="ra-section anim-fade-slide">
+<section id="career" class="ra-section anim-fade-slide" style="position: relative;">
+  
+
   <div class="ra-container">
     <div class="ra-section-header anim-fade-slide anim-delay-1">
       <div class="ra-eyebrow">Career</div>
-      <h2 class="ra-h2">ক্যারিয়ার সম্ভাবনা</h2>
+    <a href="{{ route('internship.form') }}" class="apply-btn">Apply Now</a>
+      <h2 class="ra-h2">Career Opportunities</h2>
       <p class="ra-lead">
-        আমাদের কোর্স শেষ করার পর আপনার জন্য রয়েছে বিভিন্ন ইন্ডাস্ট্রি-অরিয়েন্টেড সুযোগ।
+        After completing our courses, various industry-oriented opportunities await you.
       </p>
     </div>
 
@@ -50,7 +88,7 @@
         <div class="ra-career-icon">💼</div>
         <h3 class="ra-h3">Internship Programs</h3>
         <p class="ra-muted">
-          কোর্সের সাথে পেইড ইন্টার্নশিপ – রিয়েল প্রজেক্টে কাজ করার সুযোগ।
+          Paid internships along with the course – opportunity to work on real projects.
         </p>
       </article>
 
@@ -58,7 +96,7 @@
         <div class="ra-career-icon">🚀</div>
         <h3 class="ra-h3">Job Placement</h3>
         <p class="ra-muted">
-          সফল গ্র্যাজুয়েটদের জন্য ইন্ডাস্ট্রি কানেকশন এবং জব রেফারেন্স।
+          Industry connections and job references for successful graduates.
         </p>
       </article>
 
@@ -66,7 +104,7 @@
         <div class="ra-career-icon">🌍</div>
         <h3 class="ra-h3">Freelance Readiness</h3>
         <p class="ra-muted">
-          গ্লোবাল ফ্রিল্যান্স মার্কেটপ্লেসে কাজ করার জন্য স্কিল-ভিত্তিক ট্রেনিং।
+          Skill-based training to work in global freelance marketplaces.
         </p>
       </article>
     </div>
@@ -74,7 +112,7 @@
 </section>
 
 <script>
-  // Optional: Animate on scroll (basic JS, no conflict)
+  // Animate on scroll
   const animItems = document.querySelectorAll('.anim-fade-slide');
   const onScrollAnim = () => {
     const triggerBottom = window.innerHeight * 0.9;

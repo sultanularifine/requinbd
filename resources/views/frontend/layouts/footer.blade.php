@@ -4,16 +4,19 @@
         <div class="footer-grid">
             <div>
                 <div class="brand">
-                    <span class="logo"><i class="ri-flashlight-fill"></i></span>
-                    <strong>Requin BD</strong>
+                    <span class="logo"><img src="{{ asset('frontend/logo/logo.png') }}" alt="logo"></span>
+                    <strong></strong>
                 </div>
                 <p class="muted" style="margin:.75rem 0 0">
-                    We help startups & SMBs build, ship, and scale with confidence — from concept to production.
+                    Requin BD is a youth-led social & skill development organization from Bangladesh, dedicated to
+                    empowering young people through leadership, digital skills, career readiness, and community-driven
+                    initiatives.
                 </p>
                 <div class="socials">
-                    <a href="#" aria-label="Twitter"><i class="ri-twitter-x-line"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="ri-linkedin-line"></i></a>
-                    <a href="#" aria-label="GitHub"><i class="ri-github-line"></i></a>
+                    <a href="https://web.facebook.com/RequinBD.officialPage" aria-label="Facebook"><i class="ri-facebook-line"></i></a>
+                    <a href="https://www.linkedin.com/company/requin-bd/" aria-label="LinkedIn"><i class="ri-linkedin-line"></i></a>
+                    <a href="https://www.instagram.com/requinbd/" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+
                 </div>
             </div>
             <div>
@@ -37,10 +40,10 @@
             <div>
                 <h5>Contact Us</h5>
                 <ul>
-                    <li class="muted">Nirala Khulna</li>
-                    <li class="muted">Nirala – 560 095</li>
-                    <li><a href="mailto:contact@glevotech.io">contact@requinbd.com</a></li>
-                    <li><a href="tel:+91-9876543210">+8801766359998</a></li>
+                    <li class="muted"> Nirala, Khulna, Bangladesh</li>
+
+                    <li><a href="mailto:contact@glevotech.io">requinbd.info@gmail.com</a></li>
+                    <li><a href="tel:+91-9876543210">+880 1911 210 343</a></li>
                 </ul>
             </div>
         </div>
