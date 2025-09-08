@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AboutPageController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ExecutiveMemberController;
+use App\Http\Controllers\Admin\HeroSectionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CertificateController;
@@ -99,15 +101,20 @@ Route::prefix('admin')->middleware(['auth', 'role:executive'])->group(function (
     });
 
     Route::prefix('admin')->name('admin.')->group(function () {
-       Route::resource('directors', DirectorController::class);
+        Route::resource('directors', DirectorController::class);
     });
-
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::resource('hero', HeroSectionController::class)->only(['index', 'store']);
+    });
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::resource('brands', BrandController::class);
+    });
 });
 
 
 Route::prefix('/')->group(function () {
     Route::post('certificate-verification', [CertificateVerificationController::class, 'verifyCertificate'])
-    ->name('certificate.verification.verify');
+        ->name('certificate.verification.verify');
     Route::get('/', [PageController::class, 'home'])->name('home');
     Route::get('/about', [PageController::class, 'about'])->name('about');
     Route::get('/services', [PageController::class, 'services'])->name('services');

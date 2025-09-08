@@ -3,18 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\AboutPage;
+use App\Models\Brand;
 use App\Models\Director;
 use App\Models\ExecutiveMember;
+use App\Models\HeroSection;
 use App\Models\Intern;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function home()
-    {
-        return view('frontend.pages.home');
-    }
+public function home()
+{
+    // Get the hero section
+    $hero = HeroSection::first();
+
+    // Get all brands
+    $brands = Brand::all();
+
+    // Pass data to the view
+    return view('frontend.pages.home', compact('hero', 'brands'));
+}
+
 
  public function about()
 {

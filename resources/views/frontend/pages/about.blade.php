@@ -136,7 +136,7 @@
                     {{ $member->designation }}
                 </div>
                 <div class="role" style="color:#555;">
-                    {{ $member->department_id ? $member->department->name : '-' }}
+                    {{ $member->department_id ? $member->department->name : '' }}
                 </div>
             </div>
         @endforeach
