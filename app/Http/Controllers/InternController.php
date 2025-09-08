@@ -115,50 +115,53 @@ class InternController extends Controller
     $intern->ending_date = $request->ending_date ?? date('Y-m-d', strtotime($request->joining_date . ' +4 months'));
     $intern->department_id = $request->department_id;
 
-    // Handle photo upload
+    // ✅ Handle photo upload
     if ($request->hasFile('photo')) {
         if ($intern->photo && file_exists(public_path($intern->photo))) {
-            @unlink(public_path($intern->photo));
+            unlink(public_path($intern->photo));
         }
+
         $file = $request->file('photo');
         $filename = time() . '_' . $file->getClientOriginalName();
         $file->move(public_path('uploads/interns'), $filename);
         $intern->photo = 'uploads/interns/' . $filename;
     }
 
-    // Handle CV upload
+    // ✅ Handle CV upload
     if ($request->hasFile('cv')) {
         if ($intern->cv && file_exists(public_path($intern->cv))) {
-            @unlink(public_path($intern->cv));
+            unlink(public_path($intern->cv));
         }
+
         $file = $request->file('cv');
         $filename = time() . '_' . $file->getClientOriginalName();
         $file->move(public_path('uploads/cvs'), $filename);
         $intern->cv = 'uploads/cvs/' . $filename;
     }
 
-    // **Do NOT regenerate certificate number on update**
-    // $intern->certificate_no stays unchanged
-
+    // Certificate number unchanged
     $intern->save();
 
     return redirect()->route('admin.interns.index')->with('success', 'Intern Updated Successfully!');
 }
 
-    public function destroy(Intern $intern)
-    {
-        if ($intern->photo && file_exists(public_path($intern->photo))) {
-            @unlink(public_path($intern->photo));
-        }
-
-        if ($intern->cv && file_exists(public_path($intern->cv))) {
-            @unlink(public_path($intern->cv));
-        }
-
-        $intern->delete();
-
-        return redirect()->route('admin.interns.index')->with('success', 'Intern Deleted Successfully!');
+public function destroy(Intern $intern)
+{
+    // ✅ Delete photo if exists
+    if ($intern->photo && file_exists(public_path($intern->photo))) {
+        unlink(public_path($intern->photo));
     }
+
+    // ✅ Delete CV if exists
+    if ($intern->cv && file_exists(public_path($intern->cv))) {
+        unlink(public_path($intern->cv));
+    }
+
+    $intern->delete();
+
+    return redirect()->route('admin.interns.index')->with('success', 'Intern Deleted Successfully!');
+}
+
 
     public function certificate($id)
     {

@@ -127,7 +127,7 @@ header {
   .nav ul {
     position: fixed;
     inset: 72px 0 auto 0;
-    background: var(--bg);
+    background: #080b18;
     flex-direction: column;
     gap: 0;
     transform: translateY(-120%);

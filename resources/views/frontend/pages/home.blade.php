@@ -104,7 +104,7 @@
     <section class="section cta">
         <div class="container" style="text-align:center;">
             <h2>Get In Touch</h2>
-            <a href="{{ route('contact') }}" class="btn" style="background:#ffd60a;color:#000;">Contact Us</a>
+            <a href="{{ route('contact') }}" class="btn" style="background:#E9692C;color:#ffffff;">Contact Us</a>
         </div>
     </section>
 

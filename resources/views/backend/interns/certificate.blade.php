@@ -20,7 +20,7 @@
                         <!-- Certificate Container -->
                         <div
                             style="position: relative; width:220mm; height:160mm; 
-                               margin:auto; background: url('{{ asset('backend/certificate/certificate.jpg') }}') no-repeat center; 
+                               margin:auto; background: url('{{ asset('backend/public/certificate/certificate.jpg') }}') no-repeat center; 
                                background-size: cover; font-family: 'Railway';">
 
                             <!-- Intern Name -->

@@ -10,17 +10,38 @@
                         class="fas fa-fire"></i><span>Dashboard</span>
                 </a>
             </li>
+            
+            <li class="nav-item dropdown {{ Request::routeIs('directors.*') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fa-solid fa-user-tie"></i> <span>Directors</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::routeIs('directors.index') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('admin.directors.index') }}">Director List</a>
+                    </li>
+                </ul>
+            </li>
 
             <li
-                class="nav-item dropdown {{ Request::routeIs('admin.departments.*') || Request::routeIs('admin.executive_members.*') || Request::routeIs('admin.interns.*') ? 'active' : '' }}">
+                class="nav-item dropdown 
+                  {{ Request::routeIs('admin.executive_members.*') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown"><i class="fa-solid fa-user-graduate"></i>
+                    <span>Executive</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::routeIs('admin.executive_members.*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('admin.executive_members.index') }}">All Members</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li
+                class="nav-item dropdown 
+               {{ Request::routeIs('admin.departments.*') || Request::routeIs('admin.interns.*') || Request::routeIs('certificates.*') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fa-solid fa-user-graduate"></i>
                     <span>Internship</span></a>
                 <ul class="dropdown-menu">
                     <li class="{{ Request::routeIs('admin.departments.*') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('admin.departments.index') }}">All Departments</a>
-                    </li>
-                    <li class="{{ Request::routeIs('admin.executive_members.*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('admin.executive_members.index') }}">All Members</a>
                     </li>
                     <li class="{{ Request::routeIs('admin.interns.*') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('admin.interns.index') }}">All Interns</a>
@@ -28,9 +49,9 @@
                     <li class="{{ Request::routeIs('certificates.*') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('admin.certificates.index') }}">Certificates</a>
                     </li>
-
                 </ul>
             </li>
+
 
 
             <li class="nav-item dropdown  {{ Request::routeIs('blog.*') ? 'active' : '' }}">
@@ -75,16 +96,7 @@
                 </ul>
             </li>
             {{-- @endrole --}}
-            <li class="nav-item dropdown {{ Request::routeIs('directors.*') ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                    <i class="fa-solid fa-user-tie"></i> <span>Directors</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="{{ Request::routeIs('directors.index') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('admin.directors.index') }}">Director List</a>
-                    </li>
-                </ul>
-            </li>
+
 
         </ul>
         <div class="hide-sidebar-mini mt-4 mb-4 p-3">

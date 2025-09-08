@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\AboutPage;
 use App\Models\Director;
 use App\Models\ExecutiveMember;
+use App\Models\Intern;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -14,15 +16,20 @@ class PageController extends Controller
         return view('frontend.pages.home');
     }
 
-    public function about()
-    {
-        $page = AboutPage::first() ?? new AboutPage();
-        $members = ExecutiveMember::all(); // fetch all executive members
-        $directors = Director::all();      // fetch all directors
+ public function about()
+{
+    $page = AboutPage::first() ?? new AboutPage();
+    $members = ExecutiveMember::all(); 
+    $directors = Director::all();      
 
-        return view('frontend.pages.about', compact('page', 'members', 'directors'));
-    }
+    // ✅ Active interns filter
+    $today = Carbon::today();
+    $interns = Intern::where('joining_date', '<=', $today)
+                    ->where('ending_date', '>=', $today)
+                    ->get();
 
+    return view('frontend.pages.about', compact('page', 'members', 'directors', 'interns'));
+}
     public function services()
     {
         return view('frontend.pages.services');

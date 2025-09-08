@@ -241,7 +241,7 @@ button:focus-visible {
   font-size: 1.8rem;
   margin-bottom: 2rem;
   color: #ffffff;
-text-align: center;
+  text-align: center;
 }
 
 .brand-grid {
@@ -261,4 +261,29 @@ text-align: center;
 
 .brand-grid img:hover {
   filter: grayscale(0%);
+}
+
+/* Tablet view */
+@media (max-width: 1024px) {
+  .brand-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Mobile view */
+@media (max-width: 600px) {
+  .brand-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .brand-grid img {
+    max-width: 120px;
+  }
+
+  .brand-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
 }
