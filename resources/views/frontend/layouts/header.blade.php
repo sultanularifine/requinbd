@@ -27,7 +27,7 @@
       <li><a href="{{ route('contact') }}">Contact us</a></li>
       <li><a href="{{ route('career') }}" class="btn" style="padding:.6rem 1rem">Join with us</a></li>
       <li>
-        <a href="{{ route('login') }}">
+        <a href="{{ route('executive.dashboard') }}">
           <i class="ri-login-box-line" style="font-size:1.3rem"></i>
         </a>
       </li>
