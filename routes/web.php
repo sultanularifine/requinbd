@@ -1,9 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutPageController;
-use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ExecutiveMemberController;
-use App\Http\Controllers\Admin\HeroSectionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CertificateController;
@@ -15,6 +13,8 @@ use App\Http\Controllers\InternController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DirectorController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,9 +35,22 @@ Route::middleware('guest')->group(function () {
 
 // Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/settings', [ProfileController::class, 'settings'])->name('profile.settings');
+    Route::post('/settings/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
+});
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+    Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}/update', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{user}/delete', [UserController::class, 'destroy'])->name('users.destroy');
+});
 
 // Executive/Admin dashboard
-Route::middleware(['auth', 'role:executive'])->group(function () {
+Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'executiveDashboard'])->name('executive.dashboard');
 });
 
@@ -49,7 +62,7 @@ Route::get('/', function () {
     return redirect('/home');
 });
 // Route::redirect('/', '/admin/dashboard');
-Route::prefix('admin')->middleware(['auth', 'role:executive'])->group(function () {
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
     // Dashboard / Todo Routes
     Route::prefix('dashboard')->group(function () {
@@ -101,27 +114,22 @@ Route::prefix('admin')->middleware(['auth', 'role:executive'])->group(function (
     });
 
     Route::prefix('admin')->name('admin.')->group(function () {
-        Route::resource('directors', DirectorController::class);
+       Route::resource('directors', DirectorController::class);
     });
-    Route::prefix('admin')->name('admin.')->group(function () {
-        Route::resource('hero', HeroSectionController::class)->only(['index', 'store']);
-    });
-    Route::prefix('admin')->name('admin.')->group(function () {
-        Route::resource('brands', BrandController::class);
-    });
+
 });
 
 
 Route::prefix('/')->group(function () {
     Route::post('certificate-verification', [CertificateVerificationController::class, 'verifyCertificate'])
-        ->name('certificate.verification.verify');
+    ->name('certificate.verification.verify');
     Route::get('/', [PageController::class, 'home'])->name('home');
     Route::get('/about', [PageController::class, 'about'])->name('about');
     Route::get('/services', [PageController::class, 'services'])->name('services');
     Route::get('/portfolio', [PageController::class, 'portfolio'])->name('portfolio');
     Route::get('/academy', [PageController::class, 'academy'])->name('academy');
     Route::get('/articles', [PageController::class, 'articles'])->name('articles');
-    Route::get('/articles/view', [PageController::class, 'articles_view'])->name('articles.view');
+Route::get('/articles/view/{id}', [PageController::class, 'articles_view'])->name('articles.view');
     Route::get('/career', [PageController::class, 'career'])->name('career');
     Route::get('/contact', [PageController::class, 'contact'])->name('contact');
     Route::get('/internship', [PageController::class, 'internshipForm'])->name('internship.form');

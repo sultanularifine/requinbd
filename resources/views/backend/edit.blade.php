@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', ' Dashboard')
+@section('title', 'General Dashboard')
 
 @push('style')
     <!-- CSS Libraries -->

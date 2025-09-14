@@ -1,7 +1,7 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ route('home') }}">{{ @config('app.name') }}</a>
+            <a href="/">{{ @config('app.name') }}</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
@@ -10,7 +10,7 @@
                         class="fas fa-fire"></i><span>Dashboard</span>
                 </a>
             </li>
-
+            
             <li class="nav-item dropdown {{ Request::routeIs('directors.*') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fa-solid fa-user-tie"></i> <span>Directors</span>
@@ -83,23 +83,6 @@
                     </li>
                 </ul>
             </li>
-
-            <li class="nav-item dropdown {{ Request::routeIs('hero.*') ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                    <i class="fa-solid fa-house"></i> <span>Home</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="{{ Request::routeIs('hero.index') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('admin.hero.index') }}">Edit Hero</a>
-                    </li>
-                </ul>
-              <ul class="dropdown-menu">
-    <li class="{{ Request::routeIs('admin.brands.index') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('admin.brands.index') }}">Edit Brands</a>
-    </li>
-</ul>
-            </li>
-
             {{-- @role('admin') --}}
             <li class="nav-item dropdown {{ Request::routeIs('about.*') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">

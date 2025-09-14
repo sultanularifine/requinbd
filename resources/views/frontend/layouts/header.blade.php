@@ -14,8 +14,8 @@
       <li><a href="{{ route('about') }}">About</a></li>
 
       <!-- Dropdown -->
-      {{-- <li class="nav-dropdown">
-        <a href="#" class="nav-dropdown-toggle">Our Concern ▾</a>
+       <li class="nav-dropdown">
+        <!-- <a href="#" class="nav-dropdown-toggle">Our Concern ▾</a> -->
         <ul class="nav-submenu">
           <li><a href="{{ route('services') }}">Requin IT</a></li>
           <li><a href="{{ route('academy') }}">Academy</a></li>
@@ -23,7 +23,7 @@
       </li>
       <!-- End Dropdown -->
 
-      <li><a href="{{ route('articles') }}">Blogs</a></li> --}}
+      <li><a href="{{ route('articles') }}">Blogs</a></li> 
       <li><a href="{{ route('contact') }}">Contact us</a></li>
       <li><a href="{{ route('career') }}" class="btn" style="padding:.6rem 1rem">Join with us</a></li>
       <li>

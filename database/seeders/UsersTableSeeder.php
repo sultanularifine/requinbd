@@ -22,15 +22,7 @@ class UsersTableSeeder extends Seeder
                 'role' => 'admin',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],
-            [
-                'name' => 'Executive User',
-                'email' => 'executive@requinbd.com',
-                'password' => Hash::make('password123'),
-                'role' => 'executive',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+            ]
         ]);
 
         // Sample Intern accounts
