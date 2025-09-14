@@ -26,7 +26,7 @@ class ExecutiveMemberController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:executive_members,email',
-           
+            'department_id' => 'required|exists:departments,id',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -67,7 +67,7 @@ public function edit(ExecutiveMember $executive_member)
     $request->validate([
         'name' => 'required',
         'email' => 'required|email|unique:executive_members,email,' . $executive_member->id,
-       
+        'department_id' => 'required|exists:departments,id',
         'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
 

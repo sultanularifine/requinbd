@@ -3,28 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\AboutPage;
-use App\Models\Brand;
+use App\Models\Blog;
 use App\Models\Director;
 use App\Models\ExecutiveMember;
-use App\Models\HeroSection;
 use App\Models\Intern;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-public function home()
-{
-    // Get the hero section
-    $hero = HeroSection::first();
-
-    // Get all brands
-    $brands = Brand::all();
-
-    // Pass data to the view
-    return view('frontend.pages.home', compact('hero', 'brands'));
-}
-
+    public function home()
+    {
+        return view('frontend.pages.home');
+    }
 
  public function about()
 {
@@ -55,15 +46,19 @@ public function home()
         return view('frontend.pages.academy');
     }
 
-    public function articles()
+   public function articles()
     {
-        return view('frontend.pages.blog.index');
+        
+        $blogs = Blog::with('images')->orderBy('blog_date', 'desc')->get();
+
+        return view('frontend.pages.blog.index', compact('blogs'));
     }
 
-    public function articles_view()
-    {
-        return view('frontend.pages.blog.view');
-    }
+    public function articles_view($id)
+{
+    $blog = Blog::with('images')->findOrFail($id);
+    return view('frontend.pages.blog.show', compact('blog'));
+}
 
     public function career()
     {

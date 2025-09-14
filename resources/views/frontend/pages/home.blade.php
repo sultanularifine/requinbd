@@ -16,22 +16,19 @@
     <section class="hero">
         <div class="container inner">
             <div class="text">
-                <h1>{{ $hero->title ?? 'Empowering Youth,Driving Innovation.' }}</h1>
-                <p>{{ $hero->subtitle ??
-                    'Requin BD delivers reliable end-to-end IT services, professional training, and strategic collaborations —
-                                    empowering businesses and individuals to grow with innovation and impact.' }}
-                </p>
+                <h1>Empowering Youth,<br>Driving Innovation.</h1>
+                <p>Requin BD delivers reliable end-to-end IT services, professional training, and strategic collaborations —
+                    empowering businesses and individuals to grow with innovation and impact.</p>
                 <div class="actions">
-                    <a href="{{ route('contact') }}" class="btn"
-                        style="background:#2563eb;">{{ $hero->button_text ?? 'Explore Requin BD' }}</a>
+                    <a href="{{ route('contact') }}" class="btn" style="background:#2563eb;">Explore Requin BD</a>
                     <div class="social-links">
-                        <a href="{{ $hero->facebook ?? '#' }}" target="_blank" class="social-icon">
+                        <a href="https://facebook.com/RequinBD.officialPage" target="_blank" class="social-icon">
                             <i class="ri-facebook-fill"></i>
                         </a>
-                        <a href="{{ $hero->linkedin ?? '#' }}" target="_blank" class="social-icon">
+                        <a href="https://www.linkedin.com/company/requin-bd/" target="_blank" class="social-icon">
                             <i class="ri-linkedin-fill"></i>
                         </a>
-                        <a href="{{ $hero->instagram ?? '#' }}" target="_blank" class="social-icon">
+                        <a href="https://www.instagram.com/requinbd/" target="_blank" class="social-icon">
                             <i class="ri-instagram-line"></i>
                         </a>
                     </div>
@@ -39,30 +36,22 @@
                 </div>
             </div>
             <div class="media">
-               <img src="{{ !empty($hero->image) ? asset($hero->image) : 'https://images.unsplash.com/photo-1552581234-26160f608093?q=80&w=1600&auto=format&fit=crop' }}" alt="Team collaborating">
+                <img src="https://images.unsplash.com/photo-1552581234-26160f608093?q=80&w=1600&auto=format&fit=crop"
+                    alt="Team collaborating" />
             </div>
         </div>
     </section>
-
- <section class="section">
-    <div class="container">
-        <h2 class="brand-title text-center mb-4">Our Concern</h2>
-        <div class="brand-grid d-flex flex-wrap justify-content-center gap-3">
-            @foreach($brands as $brand)
-                <div class="brand-item text-center">
-                    @if(!empty($brand->link))
-                        <a href="{{ $brand->link }}" target="_blank">
-                            <img src="{{ asset($brand->image) }}" alt="{{ $brand->name }}" class="img-fluid" style="max-width: 150px;">
-                        </a>
-                    @else
-                        <img src="{{ asset($brand->image) }}" alt="{{ $brand->name }}" class="img-fluid" style="max-width: 150px;">
-                    @endif
-                </div>
-            @endforeach
-        </div>
+<section class="section">
+  <div class="container">
+    <h2 class="brand-title">Our Concern</h2>
+    <div class="brand-grid">
+      <a href="{{ route('services') }}"><img src="{{ asset('frontend/logo/IT logo.png') }}" alt="Partner 2 Logo"></a>
+      <img src="{{ asset('frontend/logo/Requin Nexus Logo White.png') }}" alt="Partner 1 Logo">
+      <img src="{{ asset('frontend/logo/Requin Academy Logo White.png') }}" alt="Partner 3 Logo">
+      <img src="{{ asset('frontend/logo/The Light of Youth Logo.png') }}" alt="Partner 4 Logo">
     </div>
+  </div>
 </section>
-
 
     <!-- Impact Section -->
     <section class="section">

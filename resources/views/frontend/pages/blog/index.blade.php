@@ -13,67 +13,35 @@
 
   <main class="containerr">
     <section class="posts">
-      <article class="post">
-        <img src="https://picsum.photos/400/250?random=1" alt="">
-        <div class="post-content">
-          <h2><a href="view.html">5 Essential Tips for Designing a Memorable Brand Logo</a></h2>
-          <small>Dec 15, 2022 • John Smith</small>
-          <p>Learn how to design logos that people will remember...</p>
-        </div>
-      </article>
-      <article class="post">
-        <img src="https://picsum.photos/400/250?random=2" alt="">
-        <div class="post-content">
-          <h2><a href="view.html">The Dos and Don’ts of Social Media Marketing</a></h2>
-          <small>Dec 10, 2022 • Sarah Johnson</small>
-          <p>Avoid common mistakes in social media campaigns...</p>
-        </div>
-      </article>
-      <article class="post">
-        <img src="https://picsum.photos/400/250?random=6" alt="">
-        <div class="post-content">
-          <h2><a href="view.html">5 Essential Tips for Designing a Memorable Brand Logo</a></h2>
-          <small>Dec 15, 2022 • John Smith</small>
-          <p>Learn how to design logos that people will remember...</p>
-        </div>
-      </article>
-      <article class="post">
-        <img src="https://picsum.photos/400/250?random=5" alt="">
-        <div class="post-content">
-          <h2><a href="view.html">The Dos and Don’ts of Social Media Marketing</a></h2>
-          <small>Dec 10, 2022 • Sarah Johnson</small>
-          <p>Avoid common mistakes in social media campaigns...</p>
-        </div>
-      </article>
-      <article class="post">
-        <img src="https://picsum.photos/400/250?random=3" alt="">
-        <div class="post-content">
-          <h2><a href="view.html">5 Essential Tips for Designing a Memorable Brand Logo</a></h2>
-          <small>Dec 15, 2022 • John Smith</small>
-          <p>Learn how to design logos that people will remember...</p>
-        </div>
-      </article>
-      <article class="post">
-        <img src="https://picsum.photos/400/250?random=4" alt="">
-        <div class="post-content">
-          <h2><a href="view.html">The Dos and Don’ts of Social Media Marketing</a></h2>
-          <small>Dec 10, 2022 • Sarah Johnson</small>
-          <p>Avoid common mistakes in social media campaigns...</p>
-        </div>
-      </article>
-      <!-- more posts -->
+        @forelse($blogs as $blog)
+            <article class="post">
+                <img src="{{ asset('backend/' . $blog->thumbnail) }}" alt="{{ $blog->title }}">
+                <div class="post-content">
+                    <h2>
+                        <a href="{{ route('articles.view', $blog->id) }}">{{ $blog->title }}</a>
+                    </h2>
+                    <small>
+                        {{ \Carbon\Carbon::parse($blog->blog_date)->format('M d, Y') }} 
+                        • {{ $blog->author ?? 'Admin' }}
+                    </small>
+                    <p>{!! implode(' ', array_slice(explode(' ', $blog->description), 0, 17)) !!} ...</p>
+                </div>
+            </article>
+        @empty
+            <p>No articles found.</p>
+        @endforelse
     </section>
 
     <aside>
-      <h3>Categories</h3>
-      <ul>
-        <li><a href="#">Design</a></li>
-        <li><a href="#">Web Dev</a></li>
-        <li><a href="#">Marketing</a></li>
-        <li><a href="#">Branding</a></li>
-      </ul>
+        <h3>Categories</h3>
+        <ul>
+            <li><a href="#">Design</a></li>
+            <li><a href="#">Web Dev</a></li>
+            <li><a href="#">Marketing</a></li>
+            <li><a href="#">Branding</a></li>
+        </ul>
     </aside>
-  </main>
+</main>
 
 
 @endsection

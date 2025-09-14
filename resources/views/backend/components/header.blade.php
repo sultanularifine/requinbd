@@ -16,24 +16,30 @@
                 data-toggle="dropdown"
                 class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                 <img alt="image"
-                    src="{{ asset('img/avatar/avatar-1.png') }}"
+                    src="{{ Auth::user()->avatar ?? asset('img/avatar/avatar-1.png') }}"
                     class="rounded-circle mr-1">
-                <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div>
+                <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <a href="features-profile.html"
+                <a href="{{ route('profile.show') }}"
                     class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Profile
                 </a>
-                <a href="features-settings.html"
+                <a href="{{ route('profile.settings') }}"
                     class="dropdown-item has-icon">
                     <i class="fas fa-cog"></i> Settings
                 </a>
-                <div class="dropdown-divider"></div>
-                <a href="#"
-                    class="dropdown-item has-icon text-danger">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </a>
+                
+                <a href="{{ route('users.index') }}" 
+   class="dropdown-item has-icon text-primary">
+   <i class="fas fa-users"></i> Users
+</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-primary btn-lg btn-block btn-icon-split">
+                    <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+                </button>
+            </form>
             </div>
         </li>
     </ul>
