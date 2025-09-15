@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Articles - Requin BD')
+@section('title', 'Contact us - Requin BD')
 @push('styles')
     <link rel="stylesheet" href="{{ asset('frontend/css/style.contact.css') }}">
     <style>
