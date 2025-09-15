@@ -38,13 +38,13 @@
                             @foreach($users as $key => $user)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
-                                <td>
-                                    @if($user->photo)
-                                        <img src="{{ asset($user->photo) }}" alt="photo" width="50" height="50" class="rounded-circle">
-                                    @else
-                                        <img src="{{ asset('img/avatar/avatar-1.png') }}" alt="photo" width="50" height="50" class="rounded-circle">
-                                    @endif
-                                </td>
+                               <td>
+    @if($user->image)
+        <img src="{{ asset($user->image) }}" alt="photo" width="50" height="50" class="rounded-circle">
+    @else
+        <img src="{{ asset('img/avatar/avatar-1.png') }}" alt="photo" width="50" height="50" class="rounded-circle">
+    @endif
+</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ ucfirst($user->role) }}</td>

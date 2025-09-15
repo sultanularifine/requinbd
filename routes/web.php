@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CertificateVerificationController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TodoController;
@@ -82,6 +83,10 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/edit/{id}', [BlogController::class, 'edit'])->name('blog.edit');
         Route::put('/update/{id}', [BlogController::class, 'update'])->name('blog.update');
         Route::delete('/delete/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
+        Route::get('/admin/comments', [CommentController::class, 'index'])->name('admin.comment.index');
+    Route::delete('/admin/comment/{id}', [CommentController::class, 'destroy'])->name('admin.comment.destroy');
+    Route::get('/admin/comment/approve/{id}', [CommentController::class, 'approve'])->name('admin.comment.approve');
+
     });
 
     // Settings Routes
@@ -128,8 +133,12 @@ Route::prefix('/')->group(function () {
     Route::get('/services', [PageController::class, 'services'])->name('services');
     Route::get('/portfolio', [PageController::class, 'portfolio'])->name('portfolio');
     Route::get('/academy', [PageController::class, 'academy'])->name('academy');
-    Route::get('/articles', [PageController::class, 'articles'])->name('articles');
+  Route::get('/articles', [PageController::class, 'articles'])->name('articles');
 Route::get('/articles/view/{id}', [PageController::class, 'articles_view'])->name('articles.view');
+Route::post('/articles/view/{id}/comment', [PageController::class, 'storeComment'])->name('blog.comment.store');
+Route::get('/articles/category/{category}', [PageController::class, 'category'])->name('articles.category');
+Route::post('/blog/{id}/comment', [PageController::class, 'storeComment'])->name('blog.comment.store');
+
     Route::get('/career', [PageController::class, 'career'])->name('career');
     Route::get('/contact', [PageController::class, 'contact'])->name('contact');
     Route::get('/internship', [PageController::class, 'internshipForm'])->name('internship.form');

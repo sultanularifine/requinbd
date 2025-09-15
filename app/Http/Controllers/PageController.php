@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AboutPage;
 use App\Models\Blog;
+use App\Models\Comment;
 use App\Models\Director;
 use App\Models\ExecutiveMember;
 use App\Models\Intern;
@@ -17,20 +18,20 @@ class PageController extends Controller
         return view('frontend.pages.home');
     }
 
- public function about()
-{
-    $page = AboutPage::first() ?? new AboutPage();
-    $members = ExecutiveMember::all(); 
-    $directors = Director::all();      
+    public function about()
+    {
+        $page = AboutPage::first() ?? new AboutPage();
+        $members = ExecutiveMember::all();
+        $directors = Director::all();
 
-    // ✅ Active interns filter
-    $today = Carbon::today();
-    $interns = Intern::where('joining_date', '<=', $today)
-                    ->where('ending_date', '>=', $today)
-                    ->get();
+        // ✅ Active interns filter
+        $today = Carbon::today();
+        $interns = Intern::where('joining_date', '<=', $today)
+            ->where('ending_date', '>=', $today)
+            ->get();
 
-    return view('frontend.pages.about', compact('page', 'members', 'directors', 'interns'));
-}
+        return view('frontend.pages.about', compact('page', 'members', 'directors', 'interns'));
+    }
     public function services()
     {
         return view('frontend.pages.services');
@@ -46,19 +47,76 @@ class PageController extends Controller
         return view('frontend.pages.academy');
     }
 
-   public function articles()
+    public function articles()
     {
-        
+        // সব ব্লগ ছবি (gallery) সহ লোড
         $blogs = Blog::with('images')->orderBy('blog_date', 'desc')->get();
 
-        return view('frontend.pages.blog.index', compact('blogs'));
+        // distinct categories
+        $categories = Blog::select('category')
+            ->whereNotNull('category')
+            ->distinct()
+            ->get();
+
+        return view('frontend.pages.blog.index', compact('blogs', 'categories'));
     }
 
-    public function articles_view($id)
+    /**
+     * Show blogs by category
+     */
+    public function category($category)
+    {
+        $blogs = Blog::where('category', $category)
+            ->orderBy('blog_date', 'desc')
+            ->get();
+
+        $categories = Blog::select('category')
+            ->whereNotNull('category')
+            ->distinct()
+            ->get();
+
+        return view('frontend.pages.blog.index', compact('blogs', 'categories'));
+    }
+
+   public function articles_view($id)
 {
-    $blog = Blog::with('images')->findOrFail($id);
-    return view('frontend.pages.blog.show', compact('blog'));
+    $blog = Blog::with('images')->findOrFail($id); // remove 'comments'
+
+    // Suggested Blogs (Same category)
+    $suggestedBlogs = Blog::where('category', $blog->category)
+        ->orderBy('blog_date', 'desc')
+        ->take(5)
+        ->get();
+
+    // Categories
+    $categories = Blog::select('category')
+        ->whereNotNull('category')
+        ->distinct()
+        ->get();
+
+    return view('frontend.pages.blog.show', compact('blog', 'suggestedBlogs', 'categories'));
 }
+
+public function storeComment(Request $request, $id)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'comment' => 'required|string',
+    ]);
+
+    Comment::create([
+        'blog_id' => $id,
+        'name' => $request->name,
+        'email' => $request->email,
+        'comment' => $request->comment,
+        'status' => 'pending', // admin can approve later
+    ]);
+
+    return back()->with('success', 'Your comment has been submitted for review.');
+}
+
+
 
     public function career()
     {
@@ -68,9 +126,9 @@ class PageController extends Controller
     {
         return view('frontend.pages.contact');
     }
-      public function internshipForm()
+    public function internshipForm()
     {
-        return view('frontend.pages.application-form'); 
+        return view('frontend.pages.application-form');
     }
 
     // Store internship application
