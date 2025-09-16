@@ -4,49 +4,60 @@
         <div class="footer-grid">
             <div>
                 <div class="brand">
-                    <span class="logo"><img src="{{ asset('frontend/logo/logo.png') }}" alt="logo"></span>
-                    <strong></strong>
+                    <span class="logo">
+                        <img src="{{ $basic && $basic->image ? asset('backend/' . $basic->image) : asset('frontend/logo/logo.png') }}" alt="logo">
+                    </span>
+                    <strong>{{ $basic->site_title ?? 'Requin BD' }}</strong>
                 </div>
                 <p class="muted" style="margin:.75rem 0 0">
-                    Requin BD is a youth-led social & skill development organization from Bangladesh, dedicated to
-                    empowering young people through leadership, digital skills, career readiness, and community-driven
-                    initiatives.
+                    {{ $basic->site_tagline ?? 'Youth-led social & skill development organization from Bangladesh...' }}
                 </p>
                 <div class="socials">
-                    <a href="https://web.facebook.com/RequinBD.officialPage" aria-label="Facebook"><i class="ri-facebook-line"></i></a>
-                    <a href="https://www.linkedin.com/company/requin-bd/" aria-label="LinkedIn"><i class="ri-linkedin-line"></i></a>
-                    <a href="https://www.instagram.com/requinbd/" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
-
+                    @if($basic)
+                        @if($basic->facebook)<a href="{{ $basic->facebook }}" aria-label="Facebook"><i class="ri-facebook-line"></i></a>@endif
+                        @if($basic->instagram)<a href="{{ $basic->instagram }}" aria-label="Instagram"><i class="ri-instagram-line"></i></a>@endif
+                        @if($basic->twitter)<a href="{{ $basic->twitter }}" aria-label="Linkedin"><i class="ri-linkedin-line"></i></a>@endif
+                        
+                        
+                    @endif
                 </div>
             </div>
+
             <div>
                 <h5>About</h5>
                 <ul>
-                    <li><a href="#about">Company</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#articles">Articles</a></li>
+                    <li><a href="{{ route('about') }}">Company</a></li>
+                    <li><a href="{{ route('requin-it') }}">Services</a></li>
+                    <li><a href="{{ route('articles') }}">Blogs</a></li>
                 </ul>
             </div>
+
             <div>
                 <h5>Support</h5>
                 <ul>
-                    <li><a href="#">Help Center</a></li>
+                    <li><a href="{{ route('contact') }}">Help Center</a></li>
                     <li><a href="#">Terms of Service</a></li>
                     <li><a href="#">Privacy</a></li>
                     <li><a href="#">Pricing</a></li>
                 </ul>
             </div>
+
             <div>
                 <h5>Contact Us</h5>
                 <ul>
-                    <li class="muted"> Nirala, Khulna, Bangladesh</li>
-
-                    <li><a href="mailto:contact@glevotech.io">requinbd.info@gmail.com</a></li>
-                    <li><a href="tel:+91-9876543210">+880 1911 210 343</a></li>
+                    <li class="muted">{{ $basic->address ?? 'Nirala, Khulna, Bangladesh' }}</li>
+                    <li><a href="mailto:{{ $basic->email ?? 'requinbd.info@gmail.com' }}">{{ $basic->email ?? 'requinbd.info@gmail.com' }}</a></li>
+                    <li><a href="tel:{{ $basic->phone ?? '+880 1911 210 343' }}">{{ $basic->phone ?? '+880 1911 210 343' }}</a></li>
                 </ul>
             </div>
         </div>
-        <div class="copyright">© <span id="year"></span> Requin BD. All rights reserved.</div>
+<div class="copyright">
+    © <span id="year"></span> {{ $basic->site_title ?? 'Requin BD' }}. All rights reserved. 
+   <small> Developed by <a href="https://www.linkedin.com/in/sultanularifine" target="_blank" rel="noopener" style="color: rgb(255, 255, 255)">Sultanul Arifine</a></small>
+</div>
     </div>
 </footer>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>

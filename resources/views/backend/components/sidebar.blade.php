@@ -69,25 +69,63 @@
                         </li>
                     </ul>
                 </li>
-            @endif
-            @if (in_array($userRole, ['admin', 'executive']))
                 <li
-                    class="nav-item dropdown  {{ Request::routeIs('admin.departments.*') || Request::routeIs('admin.interns.*') || Request::routeIs('certificates.*') ? 'active' : '' }}">
-                    <a href="#" class="nav-link has-dropdown"><i class="fa-solid fa-user-graduate"></i>
-                        <span>Internship</span></a>
+                    class="nav-item dropdown {{ Request::routeIs('academic.hero*') || Request::routeIs('courses.*') || Request::routeIs('internships.*') || Request::routeIs('sessions.*') ? 'active' : '' }}">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                        <i class="fa-solid fa-graduation-cap"></i> <span>Academic</span>
+                    </a>
                     <ul class="dropdown-menu">
-                        <li class="{{ Request::routeIs('admin.departments.*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('admin.departments.index') }}">All Departments</a>
+                        <li class="{{ Request::routeIs('settings.hero') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('settings.hero') }}">Hero Section</a>
                         </li>
-                        <li class="{{ Request::routeIs('admin.interns.*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('admin.interns.index') }}">All Interns</a>
+                        <li class="{{ Request::routeIs('courses.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('courses.index') }}">Courses</a>
                         </li>
-                        <li class="{{ Request::routeIs('certificates.*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('admin.certificates.index') }}">Certificates</a>
+                        <li class="{{ Request::routeIs('internships.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('internships.index') }}">Internships</a>
+                        </li>
+                        <li class="{{ Request::routeIs('sessions.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('sessions.index') }}">Sessions</a>
                         </li>
                     </ul>
                 </li>
             @endif
+            @if (in_array($userRole, ['admin', 'executive']))
+                <li
+                    class="nav-item dropdown  {{ Request::routeIs('admin.departments.*') ||
+                    Request::routeIs('admin.interns.*') ||
+                    Request::routeIs('admin.certificates.*') ||
+                    Request::routeIs('admin.intern-applications.*')
+                        ? 'active'
+                        : '' }}">
+
+                    <a href="#" class="nav-link has-dropdown">
+                        <i class="fa-solid fa-user-graduate"></i>
+                        <span>Internship</span>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        {{-- ✅ Internship Applications --}}
+                        <li class="{{ Request::routeIs('admin.intern-applications.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('admin.intern-applications.index') }}">Applications</a>
+                        </li>
+                        <li class="{{ Request::routeIs('admin.departments.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('admin.departments.index') }}">All Departments</a>
+                        </li>
+
+                        <li class="{{ Request::routeIs('admin.interns.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('admin.interns.index') }}">All Interns</a>
+                        </li>
+
+                        {{-- <li class="{{ Request::routeIs('admin.certificates.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('admin.certificates.index') }}">Certificates</a>
+                        </li> --}}
+
+
+                    </ul>
+                </li>
+            @endif
+
 
             @if (in_array($userRole, ['admin', 'executive', 'intern']))
                 <li

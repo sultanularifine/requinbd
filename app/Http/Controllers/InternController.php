@@ -114,6 +114,7 @@ class InternController extends Controller
     $intern->joining_date = $request->joining_date;
     $intern->ending_date = $request->ending_date ?? date('Y-m-d', strtotime($request->joining_date . ' +4 months'));
     $intern->department_id = $request->department_id;
+    $intern->certificate_no = $request->certificate_no;
 
     // ✅ Handle photo upload
     if ($request->hasFile('photo')) {

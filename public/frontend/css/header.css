@@ -69,6 +69,7 @@ header {
   background: var(--accent);
   color: var(--white);
   border: 0;
+  cursor: pointer;
 }
 
 /* =================== DROPDOWN =================== */
@@ -131,7 +132,7 @@ header {
     flex-direction: column;
     gap: 0;
     transform: translateY(-120%);
-    transition: .35s ease;
+    transition: transform 0.35s ease;
     padding: 20px;
   }
 
@@ -153,7 +154,7 @@ header {
     display: block;
   }
 
-  /* Dropdown in mobile */
+  /* Mobile Dropdown */
   .nav-submenu {
     position: static;
     background: transparent;
@@ -165,15 +166,4 @@ header {
   .nav-dropdown.open .nav-submenu {
     display: block;
   }
-}
-.nav-submenu {
-  display: none !important;   /* hidden by default */
-}
-@media (min-width: 921px) {
-  .nav-dropdown:hover .nav-submenu {
-    display: block !important;
-  }
-}
-.nav-dropdown.open .nav-submenu {
-  display: block !important
 }

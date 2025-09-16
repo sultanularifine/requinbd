@@ -84,7 +84,7 @@
                                             value="{{ !empty($basics) ? $basics->instagram : '' }}" name="instagram">
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label><b>Twitter Link</b></label>
+                                        <label><b>Linkedin Link</b></label>
                                         <input type="text" class="form-control"
                                             value="{{ !empty($basics) ? $basics->twitter : '' }}" name="twitter">
                                     </div>

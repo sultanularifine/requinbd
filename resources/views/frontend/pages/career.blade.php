@@ -76,8 +76,8 @@
   <div class="ra-container">
     <div class="ra-section-header anim-fade-slide anim-delay-1">
       <div class="ra-eyebrow">Career</div>
-    <!-- <a href="{{ route('internship.form') }}" class="apply-btn">Apply Now</a> -->
-    <a href="https://forms.gle/bnUiYbz2TccbbiNGA" class="apply-btn">Apply Now</a>
+    <a href="{{ route('internship.form') }}" class="apply-btn">Apply Now</a> 
+    
       <h2 class="ra-h2">Career Opportunities</h2>
       <p class="ra-lead">
         After completing our courses, various industry-oriented opportunities await you.

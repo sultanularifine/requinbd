@@ -90,17 +90,22 @@
                                 </div>
                             </div>
 
-                            <!-- Joining & Ending Dates -->
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label><b>Joining Date*</b></label>
-                                    <input type="date" id="joining_date" name="joining_date" class="form-control" value="{{ $intern->joining_date }}" required>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label><b>Ending Date</b></label>
-                                    <input type="date" id="ending_date" name="ending_date" class="form-control" value="{{ $intern->ending_date }}">
-                                </div>
-                            </div>
+                           <!-- Joining, Ending Dates & Certificate No -->
+<div class="row">
+    <div class="form-group col-md-4">
+        <label><b>Joining Date*</b></label>
+        <input type="date" id="joining_date" name="joining_date" class="form-control" value="{{ $intern->joining_date }}" required>
+    </div>
+    <div class="form-group col-md-4">
+        <label><b>Ending Date</b></label>
+        <input type="date" id="ending_date" name="ending_date" class="form-control" value="{{ $intern->ending_date }}">
+    </div>
+    <div class="form-group col-md-4">
+        <label><b>Certificate No</b></label>
+        <input type="text" name="certificate_no" class="form-control" value="{{ $intern->certificate_no }}">
+    </div>
+</div>
+
 
                             <!-- Upload CV & Photo -->
                             <div class="row">

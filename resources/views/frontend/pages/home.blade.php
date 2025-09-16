@@ -45,9 +45,10 @@
   <div class="container">
     <h2 class="brand-title">Our Concern</h2>
     <div class="brand-grid">
-      <a href="{{ route('services') }}"><img src="{{ asset('frontend/logo/IT logo.png') }}" alt="Partner 2 Logo"></a>
+      <a href="{{ route('requin-it') }}"><img src="{{ asset('frontend/logo/IT logo.png') }}" alt="Partner 2 Logo"></a>
+      <a href="{{route('academy')}}"> <img src="{{ asset('frontend/logo/Requin Academy Logo White.png') }}" alt="Partner 3 Logo"></a>
       <img src="{{ asset('frontend/logo/Requin Nexus Logo White.png') }}" alt="Partner 1 Logo">
-      <img src="{{ asset('frontend/logo/Requin Academy Logo White.png') }}" alt="Partner 3 Logo">
+     
       <img src="{{ asset('frontend/logo/The Light of Youth Logo.png') }}" alt="Partner 4 Logo">
     </div>
   </div>
