@@ -36,7 +36,7 @@
     @include('frontend.layouts.footer')
 
     <!-- Scripts -->
-    {{-- <script>
+    <script>
         const btn = document.querySelector('.menu-toggle');
         const menu = document.getElementById('menu');
         btn.addEventListener('click', () => menu.classList.toggle('open'));
@@ -44,7 +44,7 @@
             a.addEventListener('click', () => menu.classList.remove('open'))
         );
         document.getElementById('year').textContent = new Date().getFullYear();
-    </script> --}}
+    </script>
 
 
     @stack('scripts')
