@@ -50,6 +50,34 @@
         .anim-delay-3 {
             transition-delay: .6s;
         }
+        .ra-hero-img {
+    max-width: 90%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 12px; /* optional */
+}
+
+.ra-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .ra-hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .ra-hero-art {
+        order: -1; /* optional: moves image above text on mobile */
+       
+    }
+}
+
     </style>
 @endpush
 @section('meta_description', 'Custom IT services for startups & SMBs.')
@@ -108,15 +136,14 @@
                     </div>
                 </div>
 
-                <div class="ra-hero-art ra-card anim-zoom-in anim-delay-2">
-                    @if (!empty($hero->hero_image) && file_exists(public_path($hero->hero_image)))
-                        <img src="{{ asset($hero->hero_image) }}" alt="Hero Image" style="padding: 20px" width="490"
-                            height="280px">
-                    @else
-                        <img src="{{ asset('frontend/images/default-hero.jpg') }}" alt="Default Hero" style="padding: 20px"
-                            width="490" height="280px">
-                    @endif
-                </div>
+            <div class="ra-hero-art ra-card anim-zoom-in anim-delay-2">
+    @if (!empty($hero->hero_image) && file_exists(public_path($hero->hero_image)))
+        <img src="{{ asset($hero->hero_image) }}" alt="Hero Image" class="ra-hero-img">
+    @else
+        <img src="{{ asset('frontend/images/default-hero.jpg') }}" alt="Default Hero" class="ra-hero-img">
+    @endif
+</div>
+
             </div>
         </section>
 

@@ -9,33 +9,16 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    background: linear-gradient(135deg, #6a0dad, #ff8c00); /* purple to orange gradient */
+    background: #6a0dad; /* Purple background */
     overflow: hidden;
 }
 
-/* Moving ambient light overlay */
-body::after {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 70%);
-    pointer-events: none;
-    animation: lightMove 15s linear infinite;
-}
-
-@keyframes lightMove {
-    0% { transform: translate(0,0) rotate(0deg); }
-    50% { transform: translate(60px, 60px) rotate(180deg); }
-    100% { transform: translate(0,0) rotate(360deg); }
-}
+/* Removed body::after effect completely */
 
 /* Go Back button */
 .btn-back {
@@ -56,13 +39,13 @@ body::after {
     color: #ffd700;
 }
 
-/* Certificate frame (unchanged) */
+/* Certificate frame */
 .certificate-frame {
     position: relative;
     width: 800px;
     max-width: 95%;
     height: 500px;
-    background: #0b2347; /* Card background stays */
+    background: #0b2347; /* Card background */
     border-radius: 15px;
     padding: 40px 60px;
     display: flex;
@@ -73,11 +56,10 @@ body::after {
     /* Orange glowing border */
     border: 5px solid;
     border-image: linear-gradient(45deg, #ff8c00, #ffae00, #ff8c00) 1;
-    box-shadow: 0 0 20px rgba(255,140,0,0.5); /* subtle orange glow */
+    box-shadow: 0 0 20px rgba(255,140,0,0.5);
 }
 
-
-/* Name text in warm gold */
+/* Name text */
 .certificate-title {
     font-size: 3rem;
     font-weight: bold;
@@ -86,15 +68,15 @@ body::after {
     text-shadow: 0 0 8px rgba(0,0,0,0.3);
 }
 
-/* Certificate details */
+/* Details */
 .details {
     font-size: 1.3rem;
     line-height: 1.6;
     text-align: center;
-    color: #ffffff
+    color: #ffffff;
 }
 
-/* Department name and certificate no in cyan */
+/* Highlighted text */
 .details b {
     color: #eb692a;
 }
@@ -109,7 +91,7 @@ body::after {
 
 .status.failed { color: #ff4c4c; }
 
-/* Approved text at bottom */
+/* Approved text */
 .approved {
     margin-top: auto;
     font-size: 1rem;
@@ -118,7 +100,7 @@ body::after {
     margin-top: 30px;
 }
 
-/* Subtle glow on certificate */
+/* Subtle glow */
 .certificate-frame::after {
     content: "";
     position: absolute;
