@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('internships', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('sessions', function (Blueprint $table) {
+             if (!Schema::hasColumn('sessions', 'platform')) {
+                $table->string('platform')->default('Zoom')->after('mode');
+            }
         });
     }
 
@@ -22,6 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('internships');
+        Schema::table('sessions', function (Blueprint $table) {
+             $table->dropColumn('platform');
+        });
     }
 };

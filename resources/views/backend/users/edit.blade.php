@@ -57,9 +57,9 @@
 
                     <div class="mb-3">
                         <label class="form-label"><strong>Photo</strong></label>
-                        <input type="file" name="photo" class="form-control">
-                        @if($user->photo)
-                            <img src="{{ asset($user->photo) }}" alt="photo" width="80" height="80" class="rounded-circle mt-2">
+                        <input type="file" name="image" class="form-control">
+                        @if($user->image)
+                            <img src="{{ asset($user->image) }}" alt="image" width="80" height="80" class="rounded-circle mt-2">
                         @endif
                     </div>
 

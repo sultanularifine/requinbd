@@ -39,7 +39,8 @@
                     <div class="card-body text-center">
 
                         <!-- Profile Photo (optional) -->
-                        <img src="{{ asset('img/avatar/avatar-1.png') }}" alt="Avatar" class="rounded-circle mb-3" width="150" height="150">
+<img src="{{ Auth::user()->image ? asset(Auth::user()->image) : asset('img/avatar/avatar-1.png') }}"
+     alt="Avatar" class="rounded-circle mb-3" width="150" height="150">
 
                         <!-- Name and Role -->
                         <h3 class="card-title mb-1">{{ Auth::user()->name }}</h3>

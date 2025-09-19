@@ -107,7 +107,7 @@
                                 <!-- Upload CV & Photo -->
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label><b>Upload CV (PDF)*</b></label>
+                                        <label><b>Upload CV (PDF)</b></label>
                                         <input type="file" name="cv" class="form-control" accept="application/pdf">
                                     </div>
                                     <div class="form-group col-md-6">

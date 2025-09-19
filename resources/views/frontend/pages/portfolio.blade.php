@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Articles - Glevo Tech')
+@section('title', 'postfollio - Glevo Tech')
 @push('styles')
 <link rel="stylesheet" href="{{ asset('frontend/css/style.portfolio.css') }}">
 <style>

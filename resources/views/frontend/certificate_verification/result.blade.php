@@ -1,142 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Certificate</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Railway', sans-serif;
-            background: #f5f5f5;
-        }
+<meta charset="UTF-8">
+<title>Certificate Verification</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: #6a0dad; /* Purple background */
+    overflow: hidden;
+}
 
-        .certificate-container {
-            position: relative;
-            width: 100%;
-            max-width: 1100px; /* for screen preview */
-            aspect-ratio: 220/160; /* maintain certificate ratio */
-            margin: 30px auto;
-            background: url('{{ asset('backend/certificate/certificate.jpg') }}') no-repeat center;
-            background-size: cover;
-            padding: 0 30px;
-        }
+/* Removed body::after effect completely */
 
-        .certificate-name {
-            position: absolute;
-            top: 55%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            font-size: 3em;
-            font-family: 'certificate', serif;
-            color: #000;
-            word-wrap: break-word;
-        }
+/* Go Back button */
+.btn-back {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    z-index: 10;
+}
 
-        .certificate-details {
-            position: absolute;
-            top: 61%;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            font-size: 20px;
-            color: #071b3e;
-            line-height: 1.4;
-            width: 80%;
-        }
+.btn-back:hover {
+    color: #ffd700;
+}
 
-        .signature-left,
-        .signature-right {
-            position: absolute;
-            bottom: 40px;
-            text-align: center;
-            line-height: 1.2;
-            color: #071b3e;
-        }
+/* Certificate frame */
+.certificate-frame {
+    position: relative;
+    width: 800px;
+    max-width: 95%;
+    height: 500px;
+    background: #0b2347; /* Card background */
+    border-radius: 15px;
+    padding: 40px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-        .signature-left {
-            left: 80px;
-        }
+    /* Orange glowing border */
+    border: 5px solid;
+    border-image: linear-gradient(45deg, #ff8c00, #ffae00, #ff8c00) 1;
+    box-shadow: 0 0 20px rgba(255,140,0,0.5);
+}
 
-        .signature-right {
-            right: 80px;
-          
-        }
+/* Name text */
+.certificate-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ed8f00;
+    margin-bottom: 20px;
+    text-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
 
-        .signature-left img {
-            max-width: 180px;
-            height: 25px;
-           
-        }
-        
-        .signature-right img {
-            max-width: 180px;
-            height: 45px;
-           margin-bottom: -10px;
-        }
+/* Details */
+.details {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    text-align: center;
+    color: #ffffff;
+}
 
-        .certificate-no {
-            position: absolute;
-            bottom: 40px;
-            width: 100%;
-            text-align: center;
-            font-size: 0.9em;
-            color: #071b3e;
-        }
+/* Highlighted text */
+.details b {
+    color: #eb692a;
+}
 
-        @media print {
-            .certificate-container {
-                max-width: 100%;
-            }
-        }
-    </style>
+/* Status */
+.status {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.status.failed { color: #ff4c4c; }
+
+/* Approved text */
+.approved {
+    margin-top: auto;
+    font-size: 1rem;
+    color: #fdfdfd;
+    font-style: italic;
+    margin-top: 30px;
+}
+
+/* Subtle glow */
+.certificate-frame::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(255,215,0,0.2);
+    pointer-events: none;
+}
+</style>
 </head>
-
 <body>
-    <div class="certificate-container">
-        <!-- Name -->
-        <div class="certificate-name">
-            {{ $intern->name }}
-        </div>
 
-        <!-- Details -->
-        <div class="certificate-details">
-            has successfully completed the Virtual Internship Program in the
-            <b>{{ $intern->department ? $intern->department->name : 'N/A' }}</b> department offered by Requin BD.
-            The tenure was from <b>{{ date('d F, Y', strtotime($intern->joining_date)) }}</b> to
-            <b>{{ $intern->ending_date ? date('d F, Y', strtotime($intern->ending_date)) : '-' }}</b>.
-            We wish him/her the best of luck in his/her future endeavours.
-        </div>
+<button onclick="window.history.back()" class="btn-back">Go Back</button>
 
-        <!-- Left Signature -->
-        <div class="signature-left">
-            @if ($certificate && $certificate->signature1)
-                <img src="{{ asset('storage/' . $certificate->signature1) }}" alt="Signature 1">
-            @endif
-            <div style="border-top: 1px solid #071b3e; margin-bottom:5px;"></div>
-            <b>{{ $certificate->name1 ?? '' }}</b><br>
-            {{ $certificate->designation1 ?? '' }}<br>
-            Requin BD
-        </div>
-
-        <!-- Right Signature -->
-        <div class="signature-right">
-            @if ($certificate && $certificate->signature2)
-                <img src="{{ asset('storage/' . $certificate->signature2) }}" alt="Signature 2">
-            @endif
-            <div style="border-top: 1px solid #071b3e; margin-bottom:5px;"></div>
-            <b>{{ $certificate->name2 ?? '' }}</b><br>
-            {{ $certificate->designation2 ?? '' }}<br>
-            Requin BD
-        </div>
-
-        <!-- Certificate No -->
-        <div class="certificate-no">
+<div class="certificate-frame">
+    @if($intern)
+        <div class="status success">🎉 Congratulations! 🎉</div>
+        <div class="certificate-title">{{ $intern->name }}</div>
+        <div class="details">
+            has successfully completed the Virtual Internship Program in the <b>{{ $intern->department ? $intern->department->name : 'N/A' }}</b> department.<br>
             Certificate No: <b>{{ $intern->certificate_no }}</b>
         </div>
-    </div>
-</body>
+        <div class="approved">Approved by Requin BD Authority</div>
+    @else
+        <div class="status failed">❌ Certificate Not Found</div>
+        <div class="certificate-title">Oops!</div>
+        <div class="details">
+            Please check your certificate number and try again.
+        </div>
+    @endif
+</div>
 
+</body>
 </html>

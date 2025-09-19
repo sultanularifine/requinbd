@@ -3,7 +3,6 @@
 @section('title', 'Internship Application - Requin BD')
 @push('styles')
     <style>
-        
         /* ------------------- Form Card ------------------- */
         .form-card {
             background: var(--bg-2);
@@ -147,54 +146,60 @@
         }
 
         /* ------------------- Responsive ------------------- */
-      /* ------------------- Responsive Enhancements ------------------- */
-@media (max-width: 992px) {
-    .form-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
-        gap: 15px; /* slightly smaller gap */
-    }
+        /* ------------------- Responsive Enhancements ------------------- */
+        @media (max-width: 992px) {
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+                /* 2 columns on medium screens */
+                gap: 15px;
+                /* slightly smaller gap */
+            }
 
-    h2 {
-        font-size: 28px;
-        margin-left: 0;
-    }
-}
+            h2 {
+                font-size: 28px;
+                margin-left: 0;
+            }
+        }
 
-@media (max-width: 768px) {
-    .form-card {
-        padding: 30px 20px; /* reduce padding on tablets */
-    }
+        @media (max-width: 768px) {
+            .form-card {
+                padding: 30px 20px;
+                /* reduce padding on tablets */
+            }
 
-    input.form-control,
-    select.form-control,
-    textarea.form-control {
-        padding: 14px 16px;
-        font-size: 14px;
-    }
-}
+            input.form-control,
+            select.form-control,
+            textarea.form-control {
+                padding: 14px 16px;
+                font-size: 14px;
+            }
+        }
 
-@media (max-width: 576px) {
-    .form-grid {
-        grid-template-columns: 1fr; /* single column on mobile */
-        gap: 20px; /* vertical spacing */
-    }
+        @media (max-width: 576px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+                /* single column on mobile */
+                gap: 20px;
+                /* vertical spacing */
+            }
 
-    .form-card {
-        padding: 25px 15px; /* reduce padding on small screens */
-    }
+            .form-card {
+                padding: 25px 15px;
+                /* reduce padding on small screens */
+            }
 
-    h2 {
-        font-size: 24px;
-        text-align: left;
-    }
+            h2 {
+                font-size: 24px;
+                text-align: left;
+            }
 
-    button.btn-primary {
-        width: 100%; /* button fills the screen width */
-        padding: 12px 0;
-        font-size: 15px;
-    }
-}
-
+            button.btn-primary {
+                width: 100%;
+                /* button fills the screen width */
+                padding: 12px 0;
+                font-size: 15px;
+            }
+        }
     </style>
 @endpush
 @section('content')
@@ -206,87 +211,96 @@
                 <div class="alert-success">{{ session('success') }}</div>
             @endif
 
-            {{-- <form action="{{ route('internship.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf --}}
-            <input type="hidden" name="timestamp" value="{{ now() }}">
+            <form action="{{ route('intern-applications.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="timestamp" value="{{ now() }}">
 
-            <div class="form-grid">
-                <div>
-                    <label for="formal_name">Full Name *</label>
-                    <input type="text" class="form-control" name="formal_name" id="formal_name" required>
-                </div>
+                <div class="form-grid">
+                    <div>
+                        <label for="formal_name">Full Name *</label>
+                        <input type="text" class="form-control" name="formal_name" id="formal_name" required>
+                    </div>
 
-                <div>
-                    <label for="email">Email *</label>
-                    <input type="email" class="form-control" name="email" id="email" required>
-                </div>
+                    <div>
+                        <label for="email">Email *</label>
+                        <input type="email" class="form-control" name="email" id="email" required>
+                    </div>
 
-                <div>
-                    <label for="department">Department *</label>
-                    <select class="form-control" name="department" id="department" required>
-                        <option value="">Select Department</option>
-                        <option value="IT">IT</option>
-                        <option value="Marketing">Marketing</option>
-                        <option value="Design">Design</option>
-                        <option value="HR">HR</option>
-                    </select>
-                </div>
+                    <div>
+                        <label for="department">Department *</label>
+                        <select class="form-control" name="department_id" id="department" required>
+                            <option value="">Select Department</option>
+                            @foreach ($departments as $department)
+                                <option value="{{ $department->id }}">{{ $department->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                <div>
-                    <label for="contact_no">Contact No *</label>
-                    <input type="text" class="form-control" name="contact_no" id="contact_no" required>
-                </div>
 
-                <div>
-                    <label for="dob">Date of Birth *</label>
-                    <input type="date" class="form-control" name="dob" id="dob" required>
-                </div>
 
-                <div>
-                    <label for="whatsapp_no">WhatsApp No *</label>
-                    <input type="text" class="form-control" name="whatsapp_no" id="whatsapp_no" required>
-                </div>
+                    <div>
+                        <label for="contact_no">Contact No *</label>
+                        <input type="tel" class="form-control" name="contact_no" id="contact_no" required>
+                    </div>
 
-                <div>
-                    <label for="facebook_profile">Facebook Profile</label>
-                    <input type="url" class="form-control" name="facebook_profile" id="facebook_profile">
-                </div>
+                    <div>
+                        <label for="dob">Date of Birth *</label>
+                        <input type="date" class="form-control" name="dob" id="dob" required>
+                    </div>
 
-                <div>
-                    <label for="linkedin_profile">LinkedIn Profile</label>
-                    <input type="url" class="form-control" name="linkedin_profile" id="linkedin_profile">
-                </div>
+                    <div>
+                        <label for="whatsapp_no">WhatsApp No *</label>
+                        <input type="text" class="form-control" name="whatsapp_no" id="whatsapp_no" required>
+                    </div>
 
-                <div>
-                    <label for="institution">Institution *</label>
-                    <input type="text" class="form-control" name="institution" id="institution" required>
-                </div>
+                    <div>
+                        <label for="facebook_profile">Facebook Profile</label>
+                        <input type="url" class="form-control" name="facebook_profile" id="facebook_profile">
+                    </div>
 
-                <div>
-                    <label for="present_address">Present Address *</label>
-                    <textarea class="form-control" name="present_address" id="present_address" rows="2" required></textarea>
-                </div>
+                    <div>
+                        <label for="linkedin_profile">LinkedIn Profile</label>
+                        <input type="url" class="form-control" name="linkedin_profile" id="linkedin_profile">
+                    </div>
 
-                <div class="full-width">
-                    <label for="why_join">Why do you want to join as an Intern? *</label>
-                    <textarea class="form-control" name="why_join" id="why_join" rows="4" required></textarea>
-                </div>
+                    <div>
+                        <label for="institution">Institution *</label>
+                        <input type="text" class="form-control" name="institution" id="institution" required>
+                    </div>
 
-                <div>
-                    <label for="cv">Upload your CV *</label>
-                    <input type="file" class="form-control" name="cv" id="cv" accept="application/pdf"
-                        required>
-                </div>
+                    <div>
+                        <label for="present_address">Present Address *</label>
+                        <textarea class="form-control" name="present_address" id="present_address" rows="2" required></textarea>
+                    </div>
+                    <div>
+                        <label for="designation">Designation *</label>
+                        <select class="form-control" name="designation" id="designation" required>
+                            <option value="">Select Designation</option>
+                            <option value="Intern">Intern</option>
 
-                <div>
-                    <label for="photo">Attach Photo *</label>
-                    <input type="file" class="form-control" name="photo" id="photo" accept="image/*" required>
-                </div>
+                        </select>
+                    </div>
 
-                <div class="full-width">
-                    <button type="submit" class="btn-primary">Submit Application</button>
+                    <div class="full-width">
+                        <label for="why_join">Why do you want to join as an Intern? *</label>
+                        <textarea class="form-control" name="why_join" id="why_join" rows="4" required></textarea>
+                    </div>
+
+                    <div>
+                        <label for="cv">Upload your CV *</label>
+                        <input type="file" class="form-control" name="cv" id="cv" accept="application/pdf"
+                            required>
+                    </div>
+
+                    <div>
+                        <label for="photo">Attach Photo *</label>
+                        <input type="file" class="form-control" name="photo" id="photo" accept="image/*" required>
+                    </div>
+
+                    <div class="full-width">
+                        <button type="submit" class="btn-primary">Submit Application</button>
+                    </div>
                 </div>
-            </div>
             </form>
         </div>
     </div>

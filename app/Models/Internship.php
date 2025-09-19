@@ -8,7 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Internship extends Model
 {
     use HasFactory;
-     protected $fillable = ['title', 'description', 'department_id', 'duration_months'];
+    
+    protected $fillable = [
+        'title',
+        'description',
+        'duration',
+        'stipend',
+        'mode',
+    ];
 
     public function department()
     {

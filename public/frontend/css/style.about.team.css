@@ -61,6 +61,7 @@
    }
 /* ===== Team Card ===== */
 .card {
+  max-width: 200px !important;
   position: relative;
   background: #222;
   border-radius: 50px;
@@ -107,6 +108,7 @@ div .role{
 /* ===== Responsive tweaks ===== */
 @media (max-width: 992px) {
   .card {
+    max-width: 200px;
     border-radius: 40px;
     padding: 25px 15px 35px;
   }
@@ -139,6 +141,7 @@ div .role{
   .card {
     border-radius: 30px;
     padding: 20px 15px 30px;
+    width: 200px !important;
   }
 
   .card img {
@@ -321,12 +324,12 @@ div .role{
 }
 
 .member-info {
-    padding: 5px 10px 15px;
+    padding: 0px 10px 15px;
 }
 
 .member-info h3 {
     margin: 8px 0 4px;
-    font-size: 16px;   /* slightly smaller text */
+    font-size: 14px;   /* slightly smaller text */
 }
 
 .member-info p {

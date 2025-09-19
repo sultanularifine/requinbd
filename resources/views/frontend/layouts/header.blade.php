@@ -15,10 +15,10 @@
 
       <!-- Dropdown -->
        <li class="nav-dropdown">
-        <!-- <a href="#" class="nav-dropdown-toggle">Our Concern ▾</a> -->
+        <a href="#" class="nav-dropdown-toggle">Our Concern ▾</a>
         <ul class="nav-submenu">
-          <li><a href="{{ route('services') }}">Requin IT</a></li>
-          <li><a href="{{ route('academy') }}">Academy</a></li>
+          <li><a href="{{ route('requin-it') }}">Requin IT</a></li>
+          <li><a href="{{ route('academy') }}">Requin Academy</a></li>
         </ul>
       </li>
       <!-- End Dropdown -->

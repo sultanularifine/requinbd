@@ -175,6 +175,7 @@
                             <div class="member-info">
                                 <h3 style="color:#fff;">{{ $intern->name }}</h3>
                                 <p style="color:#ccc;">{{ $intern->designation }}</p>
+                              <p style="color:#ccc;">{{ $intern->department->name ?? 'N/A' }}</p>
                             </div>
                         </div>
                     @endforeach

@@ -1,101 +1,150 @@
+@php
+    $userRole = Auth::user()->role;
+@endphp
+
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
             <a href="/">{{ @config('app.name') }}</a>
         </div>
+
+
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li class="nav-item dropdown {{ Request::routeIs('dashboard') ? 'active' : '' }}">
-                <a href="{{ route('executive.dashboard') }}" class="nav-link"><i
-                        class="fas fa-fire"></i><span>Dashboard</span>
-                </a>
-            </li>
-            
-            <li class="nav-item dropdown {{ Request::routeIs('directors.*') ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                    <i class="fa-solid fa-user-tie"></i> <span>Directors</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="{{ Request::routeIs('directors.index') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('admin.directors.index') }}">Director List</a>
-                    </li>
-                </ul>
-            </li>
+            @if ($userRole === 'admin')
+                <li class="nav-item dropdown {{ Request::routeIs('dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('executive.dashboard') }}" class="nav-link"><i
+                            class="fas fa-fire"></i><span>Dashboard</span>
+                    </a>
+                </li>
 
-            <li
-                class="nav-item dropdown 
+                <li class="nav-item dropdown {{ Request::routeIs('directors.*') ? 'active' : '' }}">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                        <i class="fa-solid fa-user-tie"></i> <span>Directors</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="{{ Request::routeIs('directors.index') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('admin.directors.index') }}">Director List</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li
+                    class="nav-item dropdown 
                   {{ Request::routeIs('admin.executive_members.*') ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown"><i class="fa-solid fa-user-graduate"></i>
-                    <span>Executive</span></a>
-                <ul class="dropdown-menu">
-                    <li class="{{ Request::routeIs('admin.executive_members.*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('admin.executive_members.index') }}">All Members</a>
-                    </li>
-                </ul>
-            </li>
+                    <a href="#" class="nav-link has-dropdown"><i class="fa-solid fa-user-graduate"></i>
+                        <span>Executive</span></a>
+                    <ul class="dropdown-menu">
+                        <li class="{{ Request::routeIs('admin.executive_members.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('admin.executive_members.index') }}">All Members</a>
+                        </li>
+                    </ul>
+                </li>
 
-            <li
-                class="nav-item dropdown 
-               {{ Request::routeIs('admin.departments.*') || Request::routeIs('admin.interns.*') || Request::routeIs('certificates.*') ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown"><i class="fa-solid fa-user-graduate"></i>
-                    <span>Internship</span></a>
-                <ul class="dropdown-menu">
-                    <li class="{{ Request::routeIs('admin.departments.*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('admin.departments.index') }}">All Departments</a>
-                    </li>
-                    <li class="{{ Request::routeIs('admin.interns.*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('admin.interns.index') }}">All Interns</a>
-                    </li>
-                    <li class="{{ Request::routeIs('certificates.*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('admin.certificates.index') }}">Certificates</a>
-                    </li>
-                </ul>
-            </li>
+                <li class="nav-item dropdown {{ Request::routeIs('settings.*') ? 'active' : '' }}">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                        <i class="fa-solid fa-gear"></i> <span>Settings</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="{{ Request::routeIs('settings.basic') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('settings.basic') }}">Basic Settings</a>
+                        </li>
+                        <li class="{{ Request::routeIs('settings.banner') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('settings.banner') }}">Banner Settings</a>
+                        </li>
+                        <li class="{{ Request::routeIs('contact/message') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('settings.contactShow') }}">Contact Message</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown {{ Request::routeIs('about.*') ? 'active' : '' }}">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                        <i class="fa-solid fa-circle-info"></i> <span>About</span>
+                    </a>
+                    <ul class="dropdown-menu">
+
+                        <li class="{{ Request::routeIs('about.edit') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('about.edit') }}">Edit About</a>
+                        </li>
+                    </ul>
+                </li>
+                <li
+                    class="nav-item dropdown {{ Request::routeIs('academic.hero*') || Request::routeIs('courses.*') || Request::routeIs('internships.*') || Request::routeIs('sessions.*') ? 'active' : '' }}">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                        <i class="fa-solid fa-graduation-cap"></i> <span>Academic</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="{{ Request::routeIs('settings.hero') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('settings.hero') }}">Hero Section</a>
+                        </li>
+                        <li class="{{ Request::routeIs('courses.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('courses.index') }}">Courses</a>
+                        </li>
+                        <li class="{{ Request::routeIs('internships.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('internships.index') }}">Internships</a>
+                        </li>
+                        <li class="{{ Request::routeIs('sessions.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('sessions.index') }}">Sessions</a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
+            @if (in_array($userRole, ['admin', 'executive']))
+                <li
+                    class="nav-item dropdown  {{ Request::routeIs('admin.departments.*') ||
+                    Request::routeIs('admin.interns.*') ||
+                    Request::routeIs('admin.certificates.*') ||
+                    Request::routeIs('admin.intern-applications.*')
+                        ? 'active'
+                        : '' }}">
+
+                    <a href="#" class="nav-link has-dropdown">
+                        <i class="fa-solid fa-user-graduate"></i>
+                        <span>Internship</span>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        {{-- ✅ Internship Applications --}}
+                        <li class="{{ Request::routeIs('admin.intern-applications.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('admin.intern-applications.index') }}">Applications</a>
+                        </li>
+                        <li class="{{ Request::routeIs('admin.departments.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('admin.departments.index') }}">All Departments</a>
+                        </li>
+
+                        <li class="{{ Request::routeIs('admin.interns.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('admin.interns.index') }}">All Interns</a>
+                        </li>
+
+                        {{-- <li class="{{ Request::routeIs('admin.certificates.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('admin.certificates.index') }}">Certificates</a>
+                        </li> --}}
 
 
+                    </ul>
+                </li>
+            @endif
 
-            <li class="nav-item dropdown  {{ Request::routeIs('blog.*') ? 'active' : '' }}">
 
-                <a href="#" class="nav-link has-dropdown "><i class="fa-solid fa-blog"></i><span>Blogs</span></a>
-                <ul class="dropdown-menu ">
-                    <li class = "{{ Request::routeIs('blog.create') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('blog.create') }}">Add Blog</a>
-                    </li>
-                    <li class="{{ Request::routeIs('blog.list') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('blog.list') }}">Blog List</a>
-                    </li>
-
-                </ul>
-            </li>
-            <li class="nav-item dropdown {{ Request::routeIs('settings.*') ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                    <i class="fa-solid fa-gear"></i> <span>Settings</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="{{ Request::routeIs('settings.basic') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('settings.basic') }}">Basic Settings</a>
-                    </li>
-                    <li class="{{ Request::routeIs('settings.banner') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('settings.banner') }}">Banner Settings</a>
-                    </li>
-                    <li class="{{ Request::routeIs('contact/message') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('settings.contactShow') }}">Contact Message</a>
-                    </li>
-                </ul>
-            </li>
-            {{-- @role('admin') --}}
-            <li class="nav-item dropdown {{ Request::routeIs('about.*') ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                    <i class="fa-solid fa-circle-info"></i> <span>About</span>
-                </a>
-                <ul class="dropdown-menu">
-
-                    <li class="{{ Request::routeIs('about.edit') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('about.edit') }}">Edit About</a>
-                    </li>
-                </ul>
-            </li>
-            {{-- @endrole --}}
+            @if (in_array($userRole, ['admin', 'executive', 'intern']))
+                <li
+                    class="nav-item dropdown {{ Request::routeIs('blog.*') || Request::routeIs('admin.comment.*') ? 'active' : '' }}">
+                    <a href="#" class="nav-link has-dropdown"><i
+                            class="fa-solid fa-blog"></i><span>Blogs</span></a>
+                    <ul class="dropdown-menu">
+                        <li class="{{ Request::routeIs('blog.create') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('blog.create') }}">Add Blog</a>
+                        </li>
+                        <li class="{{ Request::routeIs('blog.list') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('blog.list') }}">Blog List</a>
+                        </li>
+                        <li class="{{ Request::routeIs('admin.comment.*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('admin.comment.index') }}"><span>Comments</span></a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
 
 
         </ul>

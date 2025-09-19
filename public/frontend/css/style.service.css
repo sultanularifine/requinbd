@@ -394,7 +394,9 @@ button:focus-visible {
     outline: 2px solid var(--brand);
     outline-offset: 2px
 }
-
+.btn{
+    cursor: pointer;
+}
 
 html, body {
     margin: 0;

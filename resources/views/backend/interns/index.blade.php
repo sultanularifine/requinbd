@@ -64,9 +64,9 @@
                                                             class="btn btn-info btn-sm mr-1" title="View">View</a>
                                                         <a href="{{ route('admin.interns.edit', $intern->id) }}"
                                                             class="btn btn-warning btn-sm mr-1" title="Edit">Edit</a>
-                                                        <a href="{{ route('admin.interns.certificate', $intern->id) }}"
+                                                        {{-- <a href="{{ route('admin.interns.certificate', $intern->id) }}"
                                                             class="btn btn-success btn-sm mr-1"
-                                                            title="Certificate">Certificate</a>
+                                                            title="Certificate">Certificate</a> --}}
                                                         <form action="{{ route('admin.interns.destroy', $intern->id) }}"
                                                             method="POST" style="display:inline">
                                                             @csrf

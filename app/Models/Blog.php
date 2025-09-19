@@ -9,6 +9,14 @@ class Blog extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+    'user_id',
+    'title',
+    'sub_title',
+    'description',
+    'thumbnail',
+    'blog_date'
+];
     public function blogImage(){
         return $this->hasMany(BlogImage::class);
     }
@@ -16,4 +24,10 @@ class Blog extends Model
     {
         return $this->hasMany(BlogImage::class, 'blog_id', 'id');
     }
+    public function comments()
+{
+    return $this->hasMany(Comment::class)->where('status', 'approved');
 }
+
+}
+
