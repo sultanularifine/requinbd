@@ -7,7 +7,7 @@
                     <span class="logo">
                         <img src="{{ $basic && $basic->image ? asset('backend/' . $basic->image) : asset('frontend/logo/logo.png') }}" alt="logo">
                     </span>
-                    <strong>{{ $basic->site_title ?? 'Requin BD' }}</strong>
+                    
                 </div>
                 <p class="muted" style="margin:.75rem 0 0">
                     {{ $basic->site_tagline ?? 'Youth-led social & skill development organization from Bangladesh...' }}
@@ -51,10 +51,17 @@
                 </ul>
             </div>
         </div>
-<div class="copyright">
-    © <span id="year"></span> {{ $basic->site_title ?? 'Requin BD' }}. All rights reserved. 
-   <small> Developed by <a href="https://www.linkedin.com/in/sultanularifine" target="_blank" rel="noopener" style="color: rgb(255, 255, 255)">Sultanul Arifine</a></small>
+<div class="copyright" style="background-color:#0b1020; color:#ccc; font-size:14px; text-align:center; padding:15px 0;">
+    © <span id="year"></span> 
+    <a href="{{ route('home') }}" style="color:#5b86ff; text-decoration:none;">{{ $basic->site_title ?? 'Requin BD' }}</a>. 
+    All rights reserved. 
+    <small> Developed by 
+        <a href="https://www.linkedin.com/in/sultanularifine" target="_blank" rel="noopener" style="color:#5b86ff; text-decoration:none;">
+            Sultanul Arifine
+        </a>
+    </small>
 </div>
+
     </div>
 </footer>
 

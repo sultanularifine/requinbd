@@ -131,8 +131,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
         Route::resource('executive_members', ExecutiveMemberController::class);
 
         // 🔹 Internship Applications Routes
-        Route::post('/intern-applications/store', [InternApplicationController::class, 'store'])
-            ->name('intern-applications.store');
+        
         Route::get('/intern-applications', [InternApplicationController::class, 'index'])
             ->name('intern-applications.index');
         Route::post('/intern-applications/{id}/approve', [InternApplicationController::class, 'approve'])
@@ -165,4 +164,6 @@ Route::prefix('/')->group(function () {
     Route::get('/career', [PageController::class, 'career'])->name('career');
     Route::get('/contact', [PageController::class, 'contact'])->name('contact');
     Route::get('/internship', [PageController::class, 'internshipForm'])->name('internship.form');
+    Route::post('/intern-applications/store', [InternApplicationController::class, 'store'])
+            ->name('intern-applications.store');
 });

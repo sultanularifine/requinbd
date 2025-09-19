@@ -211,7 +211,7 @@
                 <div class="alert-success">{{ session('success') }}</div>
             @endif
 
-            <form action="{{ route('admin.intern-applications.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('intern-applications.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="timestamp" value="{{ now() }}">
 

@@ -6,6 +6,40 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        .hero .container.inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .hero .text {
+            flex: 1;
+        }
+
+        .hero .media {
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .hero .container.inner {
+                flex-direction: column;
+            }
+
+            .hero .media {
+                order: -1;
+                /* Image comes first */
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero .media img {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+    </style>
 @endpush
 
 @section('meta_description', 'Custom IT services for startups & SMBs.')
@@ -36,23 +70,25 @@
                 </div>
             </div>
             <div class="media">
-                <img src="https://images.unsplash.com/photo-1552581234-26160f608093?q=80&w=1600&auto=format&fit=crop"
-                    alt="Team collaborating" />
+                <img src="{{ asset('frontend/hero/hero-Image.jpg') }}" alt="Team collaborating" />
+            </div>
+
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <h2 class="brand-title">Our Concern</h2>
+            <div class="brand-grid">
+                <a href="{{ route('requin-it') }}"><img src="{{ asset('frontend/logo/IT logo.png') }}"
+                        alt="Partner 2 Logo"></a>
+                <a href="{{ route('academy') }}"> <img src="{{ asset('frontend/logo/Requin Academy Logo White.png') }}"
+                        alt="Partner 3 Logo"></a>
+                <img src="{{ asset('frontend/logo/Requin Nexus Logo White.png') }}" alt="Partner 1 Logo">
+
+                <img src="{{ asset('frontend/logo/The Light of Youth Logo.png') }}" alt="Partner 4 Logo">
             </div>
         </div>
     </section>
-<section class="section">
-  <div class="container">
-    <h2 class="brand-title">Our Concern</h2>
-    <div class="brand-grid">
-      <a href="{{ route('requin-it') }}"><img src="{{ asset('frontend/logo/IT logo.png') }}" alt="Partner 2 Logo"></a>
-      <a href="{{route('academy')}}"> <img src="{{ asset('frontend/logo/Requin Academy Logo White.png') }}" alt="Partner 3 Logo"></a>
-      <img src="{{ asset('frontend/logo/Requin Nexus Logo White.png') }}" alt="Partner 1 Logo">
-     
-      <img src="{{ asset('frontend/logo/The Light of Youth Logo.png') }}" alt="Partner 4 Logo">
-    </div>
-  </div>
-</section>
 
     <!-- Impact Section -->
     <section class="section">
