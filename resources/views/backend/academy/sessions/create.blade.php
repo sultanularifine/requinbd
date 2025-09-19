@@ -46,6 +46,7 @@
                             <div class="form-group">
                                 <label><b>Platform*</b></label>
                                 <select name="platform" class="form-control" required>
+                                    <option value="Google Meet" {{ old('platform') == 'Google Meet' ? 'selected' : '' }}>Google Meet</option>
                                     <option value="Zoom" {{ old('platform') == 'Zoom' ? 'selected' : '' }}>Zoom</option>
                                     <option value="On-site" {{ old('platform') == 'On-site' ? 'selected' : '' }}>On-site</option>
                                 </select>
