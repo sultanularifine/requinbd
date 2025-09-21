@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Articles - Requin')
+@section('title', 'About - Requin BD')
 @push('styles')
     <link rel="stylesheet" href="{{ asset('frontend/css/style.about.team.css') }}">
     <!-- Animation + Slideshow Script -->
@@ -57,6 +57,34 @@
         .tab-content.active {
             display: flex;
             opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 70vh;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 20vh;
+            }
+
+            .hero-content h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero-content p {
+                font-size: 0.9rem;
+            }
         }
     </style>
 @endpush
@@ -175,7 +203,7 @@
                             <div class="member-info">
                                 <h3 style="color:#fff;">{{ $intern->name }}</h3>
                                 <p style="color:#ccc;">{{ $intern->designation }}</p>
-                              <p style="color:#ccc;">{{ $intern->department->name ?? 'N/A' }}</p>
+                                <p style="color:#ccc;">{{ $intern->department->name ?? 'N/A' }}</p>
                             </div>
                         </div>
                     @endforeach
@@ -186,7 +214,7 @@
         <p class="text-center" style="color:#ccc; font-size:1rem;">No active interns right now.</p>
     @endif
 
-    
+
 
     <script>
         // Hero slideshow

@@ -30,7 +30,7 @@ body {
 }
 
 .ra-section {
-    padding: clamp(36px, 6vw, 72px) 0;
+    padding: clamp(36px, 6vw, 25px) 0;
 }
 
 .ra-eyebrow {
