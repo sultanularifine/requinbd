@@ -117,7 +117,7 @@
 
         <!-- Swiper -->
         <div class="swiper mySwiper" data-aos="fade-up" data-aos-delay="200">
-            <div class="swiper-wrapper">
+            <div class="swiper-wrapper " style="align-items: center">
                 @foreach($collaborators as $collab)
                     <div class="swiper-slide">
                         @if($collab->link)
