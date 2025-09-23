@@ -10,13 +10,18 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CertificateVerificationController;
+use App\Http\Controllers\CollaboratorController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ConcernController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\InternController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DirectorController;
+use App\Http\Controllers\HeroSectionController;
+use App\Http\Controllers\ImpactController;
 use App\Http\Controllers\InternApplicationController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
@@ -100,9 +105,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/banner', [SettingsController::class, 'banner'])->name('settings.banner');
         Route::post('/banner', [SettingsController::class, 'heroImageStore'])->name('settings.imageStore');
         Route::delete('/banner/{id}', [SettingsController::class, 'heroImageDestroy'])->name('settings.destroy');
-        Route::post('/contact/store', [SettingsController::class, 'contactStore'])->name('settings.contactStore');
-        Route::get('/contact/show', [SettingsController::class, 'contactShow'])->name('settings.contactShow');
-        Route::delete('/contacts/{id}', [SettingsController::class, 'contactDestroy'])->name('settings.contactDestroy');
+        
     });
     Route::prefix('about')->group(function () {
         Route::get('/edit', [AboutPageController::class, 'edit'])->name('about.edit');
@@ -143,6 +146,12 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('directors', DirectorController::class);
+        Route::resource('hero', HeroSectionController::class);
+        Route::resource('concerns', ConcernController::class);
+        Route::resource('impacts', ImpactController::class);
+         Route::resource('collaborators', CollaboratorController::class);
+          Route::get('contacts', [ContactController::class, 'adminIndex'])->name('contacts.index');
+    Route::delete('contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
     });
 });
 
@@ -162,8 +171,8 @@ Route::prefix('/')->group(function () {
     Route::post('/blog/{id}/comment', [PageController::class, 'storeComment'])->name('blog.comment.store');
 
     Route::get('/career', [PageController::class, 'career'])->name('career');
-    Route::get('/contact', [PageController::class, 'contact'])->name('contact');
-    Route::get('/internship', [PageController::class, 'internshipForm'])->name('internship.form');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');    Route::get('/internship', [PageController::class, 'internshipForm'])->name('internship.form');
     Route::post('/intern-applications/store', [InternApplicationController::class, 'store'])
             ->name('intern-applications.store');
 });

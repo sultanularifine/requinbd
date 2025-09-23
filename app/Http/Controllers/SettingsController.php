@@ -97,37 +97,5 @@ class SettingsController extends Controller
         }
     }
 
-    public function contactStore(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string',
-            'phone' => 'required|string',
-            'message' => 'required|string',
-        ]);
-
-        $contact = new Contact();
-        $contact->name = $request->name;
-        $contact->email = $request->email;
-        $contact->phone = $request->phone;
-        $contact->message = $request->message;
-
-        if ($contact->save()) {
-            return redirect()->route('fontend.index');
-        }
-    }
-
-    public function contactShow()
-    {
-        $contacts = Contact::all();
-        return view('backend.settings.contacts', ['contacts' => $contacts]);
-    }
-
-    public function contactDestroy($id)
-    {
-        $contacts = Contact::find($id);
-        if ($contacts->delete()) {
-            return redirect()->route('settings.contacts');
-        }
-    }
+   
 }
