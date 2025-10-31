@@ -57,6 +57,11 @@ class PageController extends Controller
         return view('frontend.pages.portfolio');
     }
 
+    public function brand_guidelines()
+    {
+        return view('frontend.pages.logo');
+    }
+
 
 
     public function academy()

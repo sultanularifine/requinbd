@@ -105,18 +105,17 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/banner', [SettingsController::class, 'banner'])->name('settings.banner');
         Route::post('/banner', [SettingsController::class, 'heroImageStore'])->name('settings.imageStore');
         Route::delete('/banner/{id}', [SettingsController::class, 'heroImageDestroy'])->name('settings.destroy');
-        
     });
     Route::prefix('about')->group(function () {
         Route::get('/edit', [AboutPageController::class, 'edit'])->name('about.edit');
         Route::put('/update', [AboutPageController::class, 'update'])->name('about.update');
     });
     Route::prefix('academic')->group(function () {
-      Route::get('/hero', [AcademicController::class, 'index'])->name('settings.hero');
-    Route::post('/hero/store', [AcademicController::class, 'store'])->name('settings.hero.store');
-    Route::resource('courses', CourseController::class);
-    Route::resource('internships', InternshipController::class);
-     Route::resource('sessions', SessionController::class);
+        Route::get('/hero', [AcademicController::class, 'index'])->name('settings.hero');
+        Route::post('/hero/store', [AcademicController::class, 'store'])->name('settings.hero.store');
+        Route::resource('courses', CourseController::class);
+        Route::resource('internships', InternshipController::class);
+        Route::resource('sessions', SessionController::class);
     });
 
 
@@ -134,7 +133,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
         Route::resource('executive_members', ExecutiveMemberController::class);
 
         // 🔹 Internship Applications Routes
-        
+
         Route::get('/intern-applications', [InternApplicationController::class, 'index'])
             ->name('intern-applications.index');
         Route::post('/intern-applications/{id}/approve', [InternApplicationController::class, 'approve'])
@@ -149,18 +148,20 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
         Route::resource('hero', HeroSectionController::class);
         Route::resource('concerns', ConcernController::class);
         Route::resource('impacts', ImpactController::class);
-         Route::resource('collaborators', CollaboratorController::class);
-          Route::get('contacts', [ContactController::class, 'adminIndex'])->name('contacts.index');
-    Route::delete('contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
+        Route::resource('collaborators', CollaboratorController::class);
+        Route::get('contacts', [ContactController::class, 'adminIndex'])->name('contacts.index');
+        Route::delete('contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
     });
 });
 
 
 Route::prefix('/')->group(function () {
-    Route::post('certificate-verification', [CertificateVerificationController::class, 'verifyCertificate'])
-        ->name('certificate.verification.verify');
+
+    Route::get('/certificate-verify', [CertificateVerificationController::class, 'showForm'])->name('certificate.verification.form');
+    Route::post('/certificate-verify', [CertificateVerificationController::class, 'verify'])->name('certificate.verification.verify');
     Route::get('/', [PageController::class, 'home'])->name('home');
     Route::get('/about', [PageController::class, 'about'])->name('about');
+    Route::get('/brand-guidelines', [PageController::class, 'brand_guidelines'])->name('brand.guidelines');
     Route::get('/requin-it', [PageController::class, 'services'])->name('requin-it');
     Route::get('/portfolio', [PageController::class, 'portfolio'])->name('portfolio');
     Route::get('/academy', [PageController::class, 'academy'])->name('academy');
@@ -171,8 +172,9 @@ Route::prefix('/')->group(function () {
     Route::post('/blog/{id}/comment', [PageController::class, 'storeComment'])->name('blog.comment.store');
 
     Route::get('/career', [PageController::class, 'career'])->name('career');
-Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');    Route::get('/internship', [PageController::class, 'internshipForm'])->name('internship.form');
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+    Route::get('/internship', [PageController::class, 'internshipForm'])->name('internship.form');
     Route::post('/intern-applications/store', [InternApplicationController::class, 'store'])
-            ->name('intern-applications.store');
+        ->name('intern-applications.store');
 });

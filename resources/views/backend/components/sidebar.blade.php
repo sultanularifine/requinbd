@@ -49,9 +49,9 @@
                         <li class="{{ Request::routeIs('settings.basic') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('settings.basic') }}">Basic Settings</a>
                         </li>
-                        <li class="{{ Request::routeIs('settings.banner') ? 'active' : '' }}">
+                        {{-- <li class="{{ Request::routeIs('settings.banner') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('settings.banner') }}">Banner Settings</a>
-                        </li>
+                        </li> --}}
                        
                     </ul>
                 </li>
