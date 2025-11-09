@@ -203,12 +203,43 @@
     </style>
 @endpush
 @section('content')
+
     <div class="container my-5">
         <h2>Internship Application Form</h2>
-
         <div class="form-card">
+            {{-- ✅ Success Message --}}
             @if (session('success'))
-                <div class="alert-success">{{ session('success') }}</div>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>✅ Success!</strong> {{ session('success') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
+            {{-- ❌ Error Message --}}
+            @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>❌ Error:</strong> {{ session('error') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
+            {{-- ⚠️ Validation Errors --}}
+            @if ($errors->any())
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>⚠️ Please fix the following errors:</strong>
+                    <ul class="mt-2 mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             @endif
 
             <form action="{{ route('intern-applications.store') }}" method="POST" enctype="multipart/form-data">
@@ -228,7 +259,8 @@
 
                     <div>
                         <label for="department">Department *</label>
-                        <select class="form-control" name="department_id" id="department" required>
+                        <select class="form-control" name="department_id" id="department" required
+                            style="background-color: #071024; color: #fff; border: 1px solid #444;">
                             <option value="">Select Department</option>
                             @foreach ($departments as $department)
                                 <option value="{{ $department->id }}">{{ $department->name }}</option>
@@ -274,12 +306,13 @@
                     </div>
                     <div>
                         <label for="designation">Designation *</label>
-                        <select class="form-control" name="designation" id="designation" required>
+                        <select class="form-control" name="designation" id="designation" required
+                            style="background-color: #071024; color: #fff; border: 1px solid #444;">
                             <option value="">Select Designation</option>
                             <option value="Intern">Intern</option>
-
                         </select>
                     </div>
+
 
                     <div class="full-width">
                         <label for="why_join">Why do you want to join as an Intern? *</label>
@@ -288,13 +321,14 @@
 
                     <div>
                         <label for="cv">Upload your CV *</label>
-                        <input type="file" class="form-control" name="cv" id="cv" accept="application/pdf"
-                            required>
+                        <input type="file" class="form-control" name="cv" id="cv"
+                            accept="application/pdf">
                     </div>
 
                     <div>
                         <label for="photo">Attach Photo *</label>
-                        <input type="file" class="form-control" name="photo" id="photo" accept="image/*" required>
+                        <input type="file" class="form-control" name="photo" id="photo" accept="image/*"
+                            required>
                     </div>
 
                     <div class="full-width">
@@ -303,6 +337,7 @@
                 </div>
             </form>
         </div>
+
     </div>
 
 @endsection

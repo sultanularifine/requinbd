@@ -169,7 +169,7 @@
                         </h3>
 
                         <p class="text-xl text-primary-dark mt-6 max-w-3xl mx-auto leading-relaxed">
-                            has <strong>successfully completed</strong> the
+                            has successfully completed the
                             <strong>Virtual Internship Program</strong> in the
                             <span class="font-extrabold text-accent-pop">
                                 {{ $intern->department->name ?? 'Department Name' }}

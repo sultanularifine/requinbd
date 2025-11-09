@@ -40,7 +40,7 @@ body {
   padding-inline: 20px;
 }
 .btn {
-  border-radius: 999px;
+  border-radius: 3px;
   padding: .6rem 1rem;
   background: var(--accent);
   color: var(--white);
@@ -203,7 +203,9 @@ button:focus-visible {
   outline: 2px solid var(--brand);
   outline-offset: 2px;
 }
-
+.btn{
+  background: #3E0093 !important ;
+}
 .social-links {
   display: flex;
   gap: 1rem;

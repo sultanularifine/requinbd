@@ -66,9 +66,9 @@ body {
     display: inline-flex;
     align-items: center;
     padding: .8rem 1.2rem;
-    border-radius: 999px;
+    border-radius: 3px;
     font-weight: 700;
-    background: var(--accent);
+    background: #3E0093 ;
     justify-content: center;
     color: var(--white);
     text-decoration: none;

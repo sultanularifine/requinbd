@@ -212,16 +212,18 @@ main {
   }
 
   .header-dropdown {
+    display: none;
     position: static;
-    max-height: 0;
+    max-height: 1px;
     overflow: hidden;
     transition: max-height 0.25s;
   }
 
   .header-has-dropdown.open > .header-dropdown {
+    display: block;
     max-height: 400px;
     background: #081422;
-    margin-top: 6px;
+    margin-top: -3px;
     padding: 8px 0;
     border-radius: 6px;
   }

@@ -22,6 +22,23 @@
             flex: 1;
         }
 
+        .section {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            letter-spacing: 1px;
+        }
+
+        .swiper-horizontal>.swiper-pagination-bullets,
+        .swiper-pagination-bullets.swiper-pagination-horizontal,
+        .swiper-pagination-custom,
+        .swiper-pagination-fraction {
+            bottom: var(--swiper-pagination-bottom);
+        }
+
         @media (max-width: 768px) {
             .hero .container.inner {
                 flex-direction: column;
@@ -47,54 +64,55 @@
 @section('content')
 
     <!-- Hero Section -->
-<section class="hero">
-    <div class="container inner">
-        <div class="text">
-            <h1>{{ $hero->title ?? 'Empowering Youth,<br>Driving Innovation.' }}</h1>
-            <p>{{ $hero->description ?? 'Requin BD delivers reliable end-to-end IT services, professional training, and strategic collaborations — empowering businesses and individuals to grow with innovation and impact.' }}</p>
-            
-            <div class="actions">
-                <a href="{{ $hero->button_link ?? route('contact') }}" class="btn" style="background:#2563eb;">
-                    {{ $hero->button_text ?? 'Explore Requin BD' }}
-                </a>
+    <section class="hero">
+        <div class="container inner">
+            <div class="text">
+                <h1>{{ $hero->title ?? 'Empowering Youth,<br>Driving Innovation.' }}</h1>
+                <p>{{ $hero->description ?? 'Requin BD delivers reliable end-to-end IT services, professional training, and strategic collaborations — empowering businesses and individuals to grow with innovation and impact.' }}
+                </p>
 
-                <div class="social-links">
-                    <a href="{{ $hero->facebook ?? '#' }}" target="_blank" class="social-icon">
-                        <i class="ri-facebook-fill"></i>
+                <div class="actions">
+                    <a href="{{ $hero->button_link ?? route('contact') }}" class="btn" style="background:#2563eb;">
+                        {{ $hero->button_text ?? 'Explore Requin BD' }}
                     </a>
-                    <a href="{{ $hero->linkedin ?? '#' }}" target="_blank" class="social-icon">
-                        <i class="ri-linkedin-fill"></i>
-                    </a>
-                    <a href="{{ $hero->instagram ?? '#' }}" target="_blank" class="social-icon">
-                        <i class="ri-instagram-line"></i>
-                    </a>
+
+                    <div class="social-links">
+                        <a href="{{ $hero->facebook ?? '#' }}" target="_blank" class="social-icon">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="{{ $hero->linkedin ?? '#' }}" target="_blank" class="social-icon">
+                            <i class="ri-linkedin-fill"></i>
+                        </a>
+                        <a href="{{ $hero->instagram ?? '#' }}" target="_blank" class="social-icon">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="media">
-            <img src="{{ $hero && $hero->image ? asset('backend/' . $hero->image) : asset('frontend/hero/hero-Imae.jpg') }}" 
-                 alt="Team collaborating" />
+            <div class="media">
+                <img src="{{ $hero && $hero->image ? asset('backend/' . $hero->image) : asset('frontend/hero/hero-Imae.jpg') }}"
+                    alt="Team collaborating" />
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-  <section class="section">
-    <div class="container">
-        <h2 class="brand-title">Our Concern</h2>
-        <div class="brand-grid">
-            @foreach($concerns as $concern)
-                @if($concern->link)
-                    <a href="{{ $concern->link }}">
+    <section class="section">
+        <div class="container">
+            <h2 class="brand-title">Our Concern</h2>
+            <div class="brand-grid">
+                @foreach ($concerns as $concern)
+                    @if ($concern->link)
+                        <a href="{{ $concern->link }}">
+                            <img src="{{ asset('backend/' . $concern->logo) }}" alt="{{ $concern->name }}">
+                        </a>
+                    @else
                         <img src="{{ asset('backend/' . $concern->logo) }}" alt="{{ $concern->name }}">
-                    </a>
-                @else
-                    <img src="{{ asset('backend/' . $concern->logo) }}" alt="{{ $concern->name }}">
-                @endif
-            @endforeach
+                    @endif
+                @endforeach
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
     <!-- Impact Section -->
@@ -111,33 +129,33 @@
     </section>
 
     <!-- Collaborations -->
- <section class="section">
-    <div class="container" style="text-align:center;">
-        <h2 data-aos="fade-up">We proudly collaborated with...</h2>
+    <section class="section">
+        <div class="container" style="text-align:center;">
+            <h2 data-aos="fade-up">We proudly collaborated with...</h2>
 
-        <!-- Swiper -->
-        <div class="swiper mySwiper" data-aos="fade-up" data-aos-delay="200">
-            <div class="swiper-wrapper " style="align-items: center">
-                @foreach($collaborators as $collab)
-                    <div class="swiper-slide">
-                        @if($collab->link)
-                            <a href="{{ $collab->link }}">
-                                <img src="{{ asset('backend/'.$collab->logo) }}" alt="{{ $collab->name }}">
-                            </a>
-                        @else
-                            <img src="{{ asset('backend/'.$collab->logo) }}" alt="{{ $collab->name }}">
-                        @endif
-                    </div>
-                @endforeach
+            <!-- Swiper -->
+            <div class="swiper mySwiper" data-aos="fade-up" data-aos-delay="200">
+                <div class="swiper-wrapper " style="align-items: center">
+                    @foreach ($collaborators as $collab)
+                        <div class="swiper-slide">
+                            @if ($collab->link)
+                                <a href="{{ $collab->link }}">
+                                    <img src="{{ asset('backend/' . $collab->logo) }}" alt="{{ $collab->name }}">
+                                </a>
+                            @else
+                                <img src="{{ asset('backend/' . $collab->logo) }}" alt="{{ $collab->name }}">
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+
+                <!-- Controls -->
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
-
-            <!-- Controls -->
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
         </div>
-    </div>
-</section>
+    </section>
 
 
     <!-- CTA -->
