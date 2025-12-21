@@ -30,12 +30,12 @@
       /* Apply Now Button */
   .apply-btn {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 0px;
+    right: 0px;
     background-color: #E9692C;
     color: #fff;
     padding: 6px 14px;          /* smaller size */
-    font-size: 14px;            /* smaller font */
+    font-size: 10px;            /* smaller font */
     border-radius: 4px;
     text-decoration: none;
     font-weight: bold;
@@ -61,8 +61,12 @@
         box-shadow: 0 0 10px rgba(233,105,44,0.6), 0 0 20px rgba(233,105,44,0.4);
     }
 }
-
-
+.apply-now{
+  padding-top: 10px;
+}
+.ra-eyebrow{
+  font-size: 13px;
+}
     </style>
 @endpush
 
@@ -75,8 +79,9 @@
 
   <div class="ra-container">
     <div class="ra-section-header anim-fade-slide anim-delay-1">
-      <div class="ra-eyebrow">Career</div>
-    <a href="{{ route('internship.form') }}" class="apply-btn">Apply Now</a> 
+     <div class="apply-now"> <a href="{{ route('internship.form') }}" class="apply-btn">Apply Now</a>  
+      <div class="ra-eyebrow">Career</div></div>
+   
     
       <h2 class="ra-h2">Career Opportunities</h2>
       <p class="ra-lead">

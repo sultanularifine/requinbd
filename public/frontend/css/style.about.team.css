@@ -18,7 +18,7 @@
    }
 
    .tab.active {
-     background: #0077cc;
+     background: #3E0093 ;
      color: #fff;
    }
 
@@ -294,7 +294,7 @@ div .role{
     overflow: hidden;
     text-align: center;
     width: 150px;       /* smaller width */
-    height: 220px;      /* adjusted height */
+    height: 240px;      /* adjusted height */
     transition: transform 0.3s, box-shadow 0.3s;
 }
 

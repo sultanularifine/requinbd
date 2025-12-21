@@ -6,11 +6,15 @@ use App\Models\AboutPage;
 use App\Models\AcademicHero;
 use App\Models\Basic;
 use App\Models\Blog;
+use App\Models\Collaborator;
 use App\Models\Comment;
+use App\Models\Concern;
 use App\Models\Course;
 use App\Models\Department;
 use App\Models\Director;
 use App\Models\ExecutiveMember;
+use App\Models\HeroSection;
+use App\Models\Impact;
 use App\Models\Intern;
 use App\Models\Internship;
 use App\Models\Session;
@@ -19,11 +23,16 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-   public function home()
-{
-    $basic = Basic::first(); // fetch the basic settings
-    return view('frontend.pages.home', compact('basic')); // pass to the Blade view
-}
+    public function home()
+    {
+        $basic = Basic::first();
+        $hero = HeroSection::first();
+        $concerns = Concern::all();
+        $impacts = Impact::all();
+        $collaborators = Collaborator::all(); // <-- Add this line
+
+        return view('frontend.pages.home', compact('basic', 'hero', 'concerns', 'impacts', 'collaborators'));
+    }
     public function about()
     {
         $page = AboutPage::first() ?? new AboutPage();
@@ -48,17 +57,22 @@ class PageController extends Controller
         return view('frontend.pages.portfolio');
     }
 
+    public function brand_guidelines()
+    {
+        return view('frontend.pages.logo');
+    }
 
 
-public function academy()
-{
-    $hero = AcademicHero::latest()->first();
-    $courses = Course::latest()->get();
-    $internships = Internship::latest()->get();
-    $sessions = Session::latest()->get(); // Fetch sessions
 
-    return view('frontend.pages.academy', compact('hero', 'courses', 'internships', 'sessions'));
-}
+    public function academy()
+    {
+        $hero = AcademicHero::latest()->first();
+        $courses = Course::latest()->get();
+        $internships = Internship::latest()->get();
+        $sessions = Session::latest()->get(); // Fetch sessions
+
+        return view('frontend.pages.academy', compact('hero', 'courses', 'internships', 'sessions'));
+    }
 
 
 
@@ -135,10 +149,7 @@ public function academy()
     {
         return view('frontend.pages.career');
     }
-    public function contact()
-    {
-        return view('frontend.pages.contact');
-    }
+    
     public function internshipForm()
     {
         $departments = Department::all(); // Admin থেকে add করা সব department

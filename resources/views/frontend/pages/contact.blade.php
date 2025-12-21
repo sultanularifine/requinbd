@@ -4,29 +4,44 @@
 @push('styles')
     <link rel="stylesheet" href="{{ asset('frontend/css/style.contact.css') }}">
     <style>
-      /* ================= Animations ================= */
-      @keyframes raFadeSlide {
-        from {
-          opacity: 0;
-          transform: translateY(40px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
+        /* ================= Animations ================= */
+        @keyframes raFadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
 
-      .anim-fade-slide {
-        opacity: 0;
-        animation: raFadeSlide 1s ease-out forwards;
-      }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-      /* delay utility */
-      .anim-delay-1 { animation-delay: 0.2s; }
-      .anim-delay-2 { animation-delay: 0.4s; }
-      .anim-delay-3 { animation-delay: 0.6s; }
-      .anim-delay-4 { animation-delay: 0.8s; }
-      .anim-delay-5 { animation-delay: 1s; }
+        .anim-fade-slide {
+            opacity: 0;
+            animation: raFadeSlide 1s ease-out forwards;
+        }
+
+        /* delay utility */
+        .anim-delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .anim-delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .anim-delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        .anim-delay-4 {
+            animation-delay: 0.8s;
+        }
+
+        .anim-delay-5 {
+            animation-delay: 1s;
+        }
     </style>
 @endpush
 @section('meta_description', 'Custom IT services for startups & SMBs.')
@@ -49,11 +64,17 @@
                 <!-- Contact Form -->
                 <div class="ra-card ra-contact-form anim-fade-slide anim-delay-2">
                     <h3 class="ra-h3">Send us a Message</h3>
-                    <form>
-                        <input type="text" placeholder="Your Name" required>
-                        <input type="email" placeholder="Your Email" required>
-                        <input type="text" placeholder="Subject">
-                        <textarea rows="5" placeholder="Your Message" required></textarea>
+
+                    @if (session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
+
+                    <form action="{{ route('contact.store') }}" method="POST">
+                        @csrf
+                        <input type="text" name="name" placeholder="Your Name" value="{{ old('name') }}" required>
+                        <input type="email" name="email" placeholder="Your Email" value="{{ old('email') }}" required>
+                        <input type="text" name="subject" placeholder="Subject" value="{{ old('subject') }}">
+                        <textarea name="message" rows="5" placeholder="Your Message" required>{{ old('message') }}</textarea>
                         <button type="submit" class="ra-btn">Send Message</button>
                     </form>
                 </div>
@@ -112,20 +133,20 @@
     </section>
 
     <script>
-      // 👉 Animate on scroll
-      const animItems = document.querySelectorAll('.anim-fade-slide');
-      const onScrollAnim = () => {
-        const triggerBottom = window.innerHeight * 0.9;
-        animItems.forEach(item => {
-          const boxTop = item.getBoundingClientRect().top;
-          if (boxTop < triggerBottom) {
-            item.style.opacity = "1";
-            item.style.animationPlayState = "running";
-          }
-        });
-      };
-      window.addEventListener('scroll', onScrollAnim);
-      window.addEventListener('load', onScrollAnim);
+        // 👉 Animate on scroll
+        const animItems = document.querySelectorAll('.anim-fade-slide');
+        const onScrollAnim = () => {
+            const triggerBottom = window.innerHeight * 0.9;
+            animItems.forEach(item => {
+                const boxTop = item.getBoundingClientRect().top;
+                if (boxTop < triggerBottom) {
+                    item.style.opacity = "1";
+                    item.style.animationPlayState = "running";
+                }
+            });
+        };
+        window.addEventListener('scroll', onScrollAnim);
+        window.addEventListener('load', onScrollAnim);
     </script>
 
 @endsection

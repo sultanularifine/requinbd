@@ -85,32 +85,7 @@
 @section('content')
 
     <main class="ra">
-        <section class="ra-section">
-            <div class="ra-container anim-fade-up">
-                <div class="ra-eyebrow">Intern Certificate</div>
-                <h2 class="ra-h2">Verify</h2>
-
-                {{-- Dynamic Message --}}
-                @if (session('success'))
-                    <div class="alert alert-success text-center animate__animated animate__fadeInDown">
-                        🎉 <strong>Congratulations!</strong> Your certificate has been verified successfully.
-                    </div>
-                @elseif(session('error'))
-                    <div class="alert alert-danger text-center animate__animated animate__shakeX">
-                        ❌ <strong>Oops!</strong> Certificate not found. Please check your ID and try again.
-                    </div>
-                @endif
-
-                {{-- Verify Form --}}
-                <form action="{{ route('certificate.verification.verify') }}" method="POST"
-                    class="ra-verify anim-fade-in anim-delay-1">
-                    @csrf
-                    <input type="text" name="certificate_no" id="certificate_no" class="ra-input"
-                        placeholder="Enter Certificate ID" required>
-                    <button type="submit" class="ra-btn">Verify</button>
-                </form>
-            </div>
-        </section>
+       
 
         <!-- HERO -->
         <section class="ra-section ra-hero">

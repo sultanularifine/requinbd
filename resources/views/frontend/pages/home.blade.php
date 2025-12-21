@@ -22,6 +22,23 @@
             flex: 1;
         }
 
+        .section {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            letter-spacing: 1px;
+        }
+
+        .swiper-horizontal>.swiper-pagination-bullets,
+        .swiper-pagination-bullets.swiper-pagination-horizontal,
+        .swiper-pagination-custom,
+        .swiper-pagination-fraction {
+            bottom: var(--swiper-pagination-bottom);
+        }
+
         @media (max-width: 768px) {
             .hero .container.inner {
                 flex-direction: column;
@@ -50,45 +67,53 @@
     <section class="hero">
         <div class="container inner">
             <div class="text">
-                <h1>Empowering Youth,<br>Driving Innovation.</h1>
-                <p>Requin BD delivers reliable end-to-end IT services, professional training, and strategic collaborations —
-                    empowering businesses and individuals to grow with innovation and impact.</p>
+                <h1>{{ $hero->title ?? 'Empowering Youth,<br>Driving Innovation.' }}</h1>
+                <p>{{ $hero->description ?? 'Requin BD delivers reliable end-to-end IT services, professional training, and strategic collaborations — empowering businesses and individuals to grow with innovation and impact.' }}
+                </p>
+
                 <div class="actions">
-                    <a href="{{ route('contact') }}" class="btn" style="background:#2563eb;">Explore Requin BD</a>
+                    <a href="{{ $hero->button_link ?? route('contact') }}" class="btn" style="background:#2563eb;">
+                        {{ $hero->button_text ?? 'Explore Requin BD' }}
+                    </a>
+
                     <div class="social-links">
-                        <a href="https://facebook.com/RequinBD.officialPage" target="_blank" class="social-icon">
+                        <a href="{{ $hero->facebook ?? '#' }}" target="_blank" class="social-icon">
                             <i class="ri-facebook-fill"></i>
                         </a>
-                        <a href="https://www.linkedin.com/company/requin-bd/" target="_blank" class="social-icon">
+                        <a href="{{ $hero->linkedin ?? '#' }}" target="_blank" class="social-icon">
                             <i class="ri-linkedin-fill"></i>
                         </a>
-                        <a href="https://www.instagram.com/requinbd/" target="_blank" class="social-icon">
+                        <a href="{{ $hero->instagram ?? '#' }}" target="_blank" class="social-icon">
                             <i class="ri-instagram-line"></i>
                         </a>
                     </div>
-
                 </div>
             </div>
-            <div class="media">
-                <img src="{{ asset('frontend/hero/hero-Image.jpg') }}" alt="Team collaborating" />
-            </div>
 
+            <div class="media">
+                <img src="{{ $hero && $hero->image ? asset('backend/' . $hero->image) : asset('frontend/hero/hero-Imae.jpg') }}"
+                    alt="Team collaborating" />
+            </div>
         </div>
     </section>
+
     <section class="section">
         <div class="container">
             <h2 class="brand-title">Our Concern</h2>
             <div class="brand-grid">
-                <a href="{{ route('requin-it') }}"><img src="{{ asset('frontend/logo/IT logo.png') }}"
-                        alt="Partner 2 Logo"></a>
-                <a href="{{ route('academy') }}"> <img src="{{ asset('frontend/logo/Requin Academy Logo White.png') }}"
-                        alt="Partner 3 Logo"></a>
-                <img src="{{ asset('frontend/logo/Requin Nexus Logo White.png') }}" alt="Partner 1 Logo">
-
-                <img src="{{ asset('frontend/logo/The Light of Youth Logo.png') }}" alt="Partner 4 Logo">
+                @foreach ($concerns as $concern)
+                    @if ($concern->link)
+                        <a href="{{ $concern->link }}">
+                            <img src="{{ asset('backend/' . $concern->logo) }}" alt="{{ $concern->name }}">
+                        </a>
+                    @else
+                        <img src="{{ asset('backend/' . $concern->logo) }}" alt="{{ $concern->name }}">
+                    @endif
+                @endforeach
             </div>
         </div>
     </section>
+
 
     <!-- Impact Section -->
     <section class="section">
@@ -110,23 +135,18 @@
 
             <!-- Swiper -->
             <div class="swiper mySwiper" data-aos="fade-up" data-aos-delay="200">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGBhH5qpcwsUoTw_46-6bY7jkWjOhrUzat6A&s"
-                            alt="Collab 1">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=800&auto=format&fit=crop"
-                            alt="Collab 2">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop"
-                            alt="Collab 3">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1506765515384-028b60a970df?q=80&w=800&auto=format&fit=crop"
-                            alt="Collab 4">
-                    </div>
+                <div class="swiper-wrapper " style="align-items: center">
+                    @foreach ($collaborators as $collab)
+                        <div class="swiper-slide">
+                            @if ($collab->link)
+                                <a href="{{ $collab->link }}">
+                                    <img src="{{ asset('backend/' . $collab->logo) }}" alt="{{ $collab->name }}">
+                                </a>
+                            @else
+                                <img src="{{ asset('backend/' . $collab->logo) }}" alt="{{ $collab->name }}">
+                            @endif
+                        </div>
+                    @endforeach
                 </div>
 
                 <!-- Controls -->
@@ -136,6 +156,7 @@
             </div>
         </div>
     </section>
+
 
     <!-- CTA -->
     <section class="section cta">

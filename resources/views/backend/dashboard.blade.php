@@ -9,13 +9,6 @@
     <link rel="stylesheet" href="{{ asset('backend/all.min.css') }}">
 
     <style>
-        /* Main Card */
-        #list1 {
-            
-            background:  #16191aff;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
         /* Title */
         .card-body .h4 {
             font-weight: 700;
@@ -35,7 +28,7 @@
             background: #f0f2f5;
             border: none;
             color: #212529;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
 
@@ -55,12 +48,12 @@
 
         .btn-lg:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
         }
 
         /* Task Header */
         .task-header {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             padding: 10px 15px;
             border-radius: 12px;
             font-weight: 600;
@@ -68,7 +61,7 @@
 
         /* Task Item */
         .task-item {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             padding: 15px;
             transition: all 0.3s ease-in-out;
@@ -79,7 +72,7 @@
         }
 
         .task-item:hover {
-            background: rgba(255,255,255,0.25);
+            background: rgba(255, 255, 255, 0.25);
             transform: scale(1.02);
         }
 
@@ -140,112 +133,105 @@
                 width: 100%;
             }
         }
+
+        .todo-card {
+            background: #1f3b73;
+            border-radius: 15px;
+            padding: 20px;
+            color: #fff;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .todo-card .task-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .todo-card .task-item p {
+            margin: 0;
+            color: #fff;
+        }
+
+        .todo-card .badge {
+            font-size: 0.85rem;
+        }
     </style>
 @endpush
 
 @section('main')
-<div class="main-content">
-    <section class="section">
-        <div class="section-header">
-            <h1>Dashboard</h1>
-        </div>
-
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-lg-12 col-md-12">
-                    <div class="card shadow-lg" id="list1">
-                        <div class="card-body py-4 px-4 px-md-5">
-
-                            <!-- Title -->
-                            <div class="text-center mt-3 mb-4 pb-3">
-                                <p class="h4 position-relative d-inline-block">
-                                    <i class="fas fa-tasks me-2" style="color: #FFC107;"></i>
-                                    <span>To-Do List</span>
-                                </p>
-                            </div>
-
-                            <!-- Task Form -->
-                            <div>
-                                <div class="card border-0 shadow-sm" style="background-color: rgba(255,255,255,0.05); border-radius: 15px;">
-                                    <div class="card-body">
-                                        <form action="{{ route('todo.store') }}" method="POST" class="form-row d-flex flex-wrap gap-2">
-                                            @csrf
+    <div class="main-content">
+        <section class="section">
+            <div class="section-header">
+                <h1>Dashboard</h1>
+            </div>
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card shadow-lg" id="list1">
+                            <div class="card-body py-4 px-4 px-md-5">
+                                <!-- To-Do List Section -->
+                                <h2 class="section-title">To-Do List</h2>
+                                <div class="todo-card">
+                                    <!-- Add New Task Form -->
+                                    <form action="{{ route('todo.store') }}" method="POST" class="mb-3">
+                                        @csrf
+                                        <div class="row g-2">
                                             <div class="col-md-4">
-                                                <input type="text" name="name" class="form-control form-control-lg" placeholder="Task name..." />
+                                                <input type="text" name="name" class="form-control"
+                                                    placeholder="Task name..." required>
                                             </div>
                                             <div class="col-md-3">
-                                                <input type="time" name="time" class="form-control form-control-lg" />
+                                                <input type="time" name="time" class="form-control" required>
                                             </div>
                                             <div class="col-md-3">
-                                                <input type="date" name="date" class="form-control form-control-lg" />
+                                                <input type="date" name="date" class="form-control" required>
                                             </div>
-                                            <div class="col-md-2 d-grid">
-                                                <button type="submit" class="btn btn-lg">Add Task</button>
-                                            </div>
-                                        </form>
-
-                                        @if ($errors->any())
-                                            <ul class="mt-3 text-danger">
-                                                @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-
-                            <hr class="my-4 text-light">
-
-                            <!-- Task List Header -->
-                            <div class="task-header d-flex justify-content-between text-light">
-                                <p class="mb-0 ">Tasks</p>
-                                <div class="d-flex justify-content-between" style="gap: 15px;">
-                                    <p class="mb-0">Time</p>
-                                    <p class="mb-0">Due Date</p>
-                                    <p class="mb-0">Actions</p>
-                                </div>
-                            </div>
-
-                            <!-- Task List -->
-                            <div class="rows mt-3">
-                                @foreach ($data as $index => $dt)
-                                    <div class="task-item">
-                                        <div class="d-flex align-items-center gap-2">
-                                            <span class="badge bg-light text-dark">{{ $index + 1 }}</span>
-                                            <p class="mb-0 p-2">{{ $dt->name }}</p>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-between gap-2 w-50 flex-wrap">
-                                            <span class="badge bg-info text-dark p-2">
-                                                {{ \Carbon\Carbon::parse($dt->time)->format('h:i A') }}
-                                            </span>
-                                            <span class="badge bg-warning text-dark p-2">
-                                                {{ \Carbon\Carbon::parse($dt->date)->format('j F Y') }}
-                                            </span>
-                                            <div class="d-flex align-items-center gap-2 ">
-                                                <a href="{{ route('todo.edit', $dt->id) }}" class="btn btn-sm btn-primary">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <form action="{{ route('todo.destroy', $dt->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit" class="btn btn-sm btn-danger m-2">
-                                                        <i class="fas fa-trash-alt"></i>
-                                                    </button>
-                                                </form>
+                                            <div class="col-md-2">
+                                                <button type="submit" class="btn btn-success w-100">Add Task</button>
                                             </div>
                                         </div>
-                                    </div>
-                                @endforeach
-                            </div>
+                                    </form>
 
+                                    <!-- Task List -->
+                                    @foreach ($data as $index => $task)
+                                        <div class="task-item col-md-12">
+                                            <!-- Normal Display -->
+                                            <div class="d-flex justify-content-between w-100 align-items-center">
+                                                <div>
+                                                    <span class="badge bg-light text-dark">{{ $index + 1 }}</span>
+                                                    <span class="ms-2">{{ $task->name }}</span>
+                                                </div>
+                                                <div class="d-flex gap-2 align-items-center">
+                                                    <span
+                                                        class="badge bg-info">{{ \Carbon\Carbon::parse($task->time)->format('h:i A') }}</span>
+                                                    <span
+                                                        class="badge bg-warning">{{ \Carbon\Carbon::parse($task->date)->format('j F Y') }}</span>
+                                                    <a href="{{ route('todo.edit', $task->id) }}"
+                                                        class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                                                    <form action="{{ route('todo.destroy', $task->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-danger"><i
+                                                                class="fas fa-trash-alt"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-</div>
+        </section>
+    </div>
 @endsection
 
 @push('scripts')

@@ -1,8 +1,12 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Articles - Requin')
+@section('title', 'About - Requin BD')
 @push('styles')
     <link rel="stylesheet" href="{{ asset('frontend/css/style.about.team.css') }}">
+     <link 
+    rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  >
     <!-- Animation + Slideshow Script -->
     <style>
         /* Hero fade animation */
@@ -58,6 +62,68 @@
             display: flex;
             opacity: 1;
         }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 70vh;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 20vh;
+            }
+
+            .hero-content h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero-content p {
+                font-size: 0.9rem;
+            }
+        }
+        .social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.social-icons a {
+  color: white;
+  background-color: #333;
+  font-size: 10px;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.social-icons a.linkedin {
+  background-color: #3E0093;
+}
+
+.social-icons a.facebook {
+  background-color: #3E0093         ;
+}
+
+.social-icons a:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
     </style>
 @endpush
 @section('meta_description', 'Custom IT services for startups & SMBs.')
@@ -160,33 +226,49 @@
     </div>
 
 
-    @if ($interns->count())
-        <section class="team-section py-5">
-            <div class="container">
-                <h2 style="color:#fff; font-weight:700;">Our Interns</h2>
-                <div class="members-container">
-                    @foreach ($interns as $intern)
-                        <div class="member-card">
-                            <!-- Circular Image -->
-                            <div class="member-img">
-                                <img src="{{ $intern->photo ? asset($intern->photo) : 'https://via.placeholder.com/150' }}"
-                                    alt="{{ $intern->name }}">
-                            </div>
-                            <div class="member-info">
-                                <h3 style="color:#fff;">{{ $intern->name }}</h3>
-                                <p style="color:#ccc;">{{ $intern->designation }}</p>
-                              <p style="color:#ccc;">{{ $intern->department->name ?? 'N/A' }}</p>
+ @if ($interns->count())
+    <section class="team-section py-5">
+        <div class="container">
+            <h2 style="color:#fff; font-weight:700;">Our Interns</h2>
+            <div class="members-container">
+                @foreach ($interns as $intern)
+                    <div class="member-card">
+                        <!-- Circular Image -->
+                        <div class="member-img">
+                            <img src="{{ $intern->photo ? asset($intern->photo) : 'https://via.placeholder.com/150' }}"
+                                 alt="{{ $intern->name }}">
+                        </div>
+
+                        <div class="member-info">
+                            <h3 style="color:#fff;">{{ $intern->name }}</h3>
+                            <p style="color:#ccc;">{{ $intern->designation }}</p>
+                            <p style="color:#ccc;">{{ $intern->department->name ?? 'N/A' }}</p>
+
+                            <!-- Social Icons -->
+                            <div class="social-icons">
+                                @if ($intern->linkedin_link)
+                                    <a href="{{ $intern->linkedin_link }}" target="_blank" class="linkedin">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                @endif
+                                @if ($intern->facebook_link)
+                                    <a href="{{ $intern->facebook_link }}" target="_blank" class="facebook">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                @endif
                             </div>
                         </div>
-                    @endforeach
-                </div>
+                    </div>
+                @endforeach
             </div>
-        </section>
-    @else
-        <p class="text-center" style="color:#ccc; font-size:1rem;">No active interns right now.</p>
-    @endif
+        </div>
+    </section>
+@else
+    <p class="text-center" style="color:#ccc; font-size:1rem;">No active interns right now.</p>
+@endif
 
-    
+
+
 
     <script>
         // Hero slideshow

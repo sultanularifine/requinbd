@@ -49,13 +49,17 @@
                         <li class="{{ Request::routeIs('settings.basic') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('settings.basic') }}">Basic Settings</a>
                         </li>
-                        <li class="{{ Request::routeIs('settings.banner') ? 'active' : '' }}">
+                        {{-- <li class="{{ Request::routeIs('settings.banner') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('settings.banner') }}">Banner Settings</a>
-                        </li>
-                        <li class="{{ Request::routeIs('contact/message') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('settings.contactShow') }}">Contact Message</a>
-                        </li>
+                        </li> --}}
+                       
                     </ul>
+                </li>
+                <li class="nav-item {{ Request::routeIs('admin.contacts.*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('admin.contacts.index') }}">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>Contacts</span>
+                    </a>
                 </li>
 
                 <li class="nav-item dropdown {{ Request::routeIs('about.*') ? 'active' : '' }}">
@@ -69,6 +73,42 @@
                         </li>
                     </ul>
                 </li>
+                <li
+                    class="nav-item dropdown  {{ Request::routeIs('admin.hero.*') ||
+                    Request::routeIs('admin.concerns.*') ||
+                    Request::routeIs('admin.impacts.*') ||
+                    Request::routeIs('admin.collaborators.*')
+                        ? 'active'
+                        : '' }}">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                        <i class="fa-solid fa-house"></i> <span>Home</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- Hero Section -->
+                        <li class="{{ Request::routeIs('admin.hero.index') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('admin.hero.index') }}">Hero Section</a>
+                        </li>
+
+                        <!-- Our Concern Section -->
+                        <li class="{{ Request::routeIs('admin.concerns.index') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('admin.concerns.index') }}">Our Concern</a>
+                        </li>
+
+                        <!-- Our Impact Section -->
+                        <li class="{{ Request::routeIs('admin.impacts.index') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('admin.impacts.index') }}">Our Impact</a>
+                        </li>
+
+                        <!-- Collaborators Section -->
+                        <li class="{{ Request::routeIs('admin.collaborators.index') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('admin.collaborators.index') }}">Collaborators</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
+
                 <li
                     class="nav-item dropdown {{ Request::routeIs('academic.hero*') || Request::routeIs('courses.*') || Request::routeIs('internships.*') || Request::routeIs('sessions.*') ? 'active' : '' }}">
                     <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">

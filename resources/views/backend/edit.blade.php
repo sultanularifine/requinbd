@@ -1,120 +1,127 @@
 @extends('backend.layouts.app')
 
-@section('title', 'General Dashboard')
+@section('title', 'Edit Task')
 
 @push('style')
-    <!-- CSS Libraries -->
+    <!-- Keep same CSS design -->
     <link rel="stylesheet" href="{{ asset('backend/library/jqvmap/dist/jqvmap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/library/summernote/dist/summernote-bs4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/all.min.css') }}">
+
+    <style>
+        /* Use same dashboard styles */
+        .card-body .h4 {
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+        }
+
+        .card-body .h4 span {
+            background: linear-gradient(90deg, #ff6b6b, #f7b42c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-control-lg {
+            border-radius: 10px;
+            background: #f0f2f5;
+            border: none;
+            color: #212529;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .form-control-lg:focus {
+            background: #fff;
+            box-shadow: 0 0 10px rgba(255, 183, 77, 0.7);
+            transform: scale(1.02);
+        }
+
+        .btn-lg {
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+            background: linear-gradient(90deg, #ff6b6b, #f7b42c);
+            border: none;
+        }
+
+        .btn-lg:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .todo-card {
+            background: #1f3b73;
+            border-radius: 15px;
+            padding: 20px;
+            color: #fff;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .todo-card label {
+            color: #fff;
+            font-weight: 500;
+        }
+    </style>
 @endpush
 
 @section('main')
     <div class="main-content">
-        <section class="vh-100 ">
-
+        <section class="section">
+            <div class="section-header">
+                <h1>Edit Task</h1>
+            </div>
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-lg-12 col-md-12">
-                        <div class="card shadow-lg" id="list1"
-                            style="border-radius: 20px; background: linear-gradient(120deg, #1f3b73, #3d80b4);">
+                        <div class="card shadow-lg">
                             <div class="card-body py-4 px-4 px-md-5">
-                                <div class="text-center mt-3 mb-4 pb-3">
-                                    <p class="h4 text-light position-relative d-inline-block"
-                                        style="font-weight: 700; font-family: 'Poppins', sans-serif; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">
-                                        <i class="fas fa-tasks me-2 " style="color: #FFC107;"></i>
-                                        <span
-                                            style="background: linear-gradient(90deg, #ff6b6b, #f7b42c); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">To-Do
-                                            List</span>
-                                        <span class="underline"></span>
-                                    </p>
-                                </div>
-
-
-                                <!-- Task Form -->
-                                <div class="">
-                                    <div class="card border-0 shadow-sm"
-                                        style="background-color: rgba(255, 255, 255, 0.1); border-radius: 15px;">
-                                        <div class="card-body">
-                                            <form action="{{ route('todo.update', $data->id) }}" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <div class="row g-1">
-                                                    <div class="col-md-4">
-                                                        <input type="text" name="name"
-                                                            class="form-control form-control-lg bg-light text-dark"
-                                                            value="{{ !empty($data) ? $data->name : '' }}"
-                                                            placeholder="Task name..." />
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <input type="time" name="time"
-                                                            class="form-control form-control-lg bg-light text-dark"
-                                                            value="{{ !empty($data) ? $data->time : '' }}" />
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <input type="date" name="date"
-                                                            class="form-control form-control-lg bg-light text-dark"
-                                                            value="{{ !empty($data) ? $data->date : '' }}" />
-                                                    </div>
-                                                    <div class="col-md-2 d-grid">
-                                                        <button type="submit"
-                                                            class="btn btn-success btn-lg">Update</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                            @if ($errors->any())
-                                                <ul class="mt-3 text-danger">
-                                                    @foreach ($errors->all() as $error)
-                                                        <li>{{ $error }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
+                                <!-- To-Do List Section -->
+                                <h2 class="section-title">To-Do List</h2>
+                                <div class="todo-card">
+                                    <!-- Add New Task Form -->
+                                    <form action="{{ route('todo.update', $data->id) }}" method="POST" class="mb-3">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="row g-2">
+                                            <div class="col-md-4">
+                                                <input type="text" name="name" class="form-control"
+                                                    value="{{ $data->name }}" required>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="time" name="time" value="{{ $data->time }}"
+                                                    class="form-control" required>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="date" name="date" value="{{ $data->date }}"
+                                                    class="form-control" required>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="submit" class="btn btn-success w-100">Update</button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
-
-                                <hr class="my-4 text-light">
-
-
-
-
+                                <div class="mt-4">
+                                    <a href="{{ route('executive.dashboard') }}" class="btn btn-light">
+                                        <i class="fas fa-arrow-left"></i> Back
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
     </div>
-    </section>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"
-        integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        $('#all').change(function(e) {
-            if (e.currentTarget.checked) {
-                $('.rows').find('input[type="checkbox"]').prop('checked', true);
-            } else {
-                $('.rows').find('input[type="checkbox"]').prop('checked', false);
-            }
-        });
-    </script>
-    </body>
-
-    </html>
 @endsection
 
 @push('scripts')
-    <!-- JS Libraies -->
     <script src="{{ asset('backend/library/simpleweather/jquery.simpleWeather.min.js') }}"></script>
     <script src="{{ asset('backend/library/chart.js/dist/Chart.min.js') }}"></script>
     <script src="{{ asset('backend/library/jqvmap/dist/jquery.vmap.min.js') }}"></script>
     <script src="{{ asset('backend/library/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
     <script src="{{ asset('backend/library/summernote/dist/summernote-bs4.min.js') }}"></script>
     <script src="{{ asset('backend/library/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
-
-    <!-- Page Specific JS File -->
     <script src="{{ asset('backend/js/page/index-0.js') }}"></script>
 @endpush

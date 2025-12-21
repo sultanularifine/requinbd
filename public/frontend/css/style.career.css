@@ -2,18 +2,12 @@
 .ra-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 16px;   /* 👉 দুই পাশে space */
+  padding: 40px 16px; /* space on both sides */
 }
 
 /* GRID SYSTEM */
 .ra-grid {
-  display: grid;
-  gap: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-/* GRID SYSTEM (reusable) */
-.ra-grid {
+  padding-top: 25px;
   display: grid;
   gap: 24px;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -21,12 +15,15 @@
 
 /* Career Card */
 .ra-career-card {
-  background: rgba(255, 255, 255, 0.04);  /* হালকা ট্রান্সপারেন্ট */
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius);
+  border-radius: var(--radius, 12px);
   padding: 24px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
   transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .ra-career-card:hover {
@@ -35,18 +32,87 @@
   box-shadow: 0 12px 26px rgba(0, 0, 0, 0.45);
 }
 
+/* Icon */
 .ra-career-icon {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   margin-bottom: 14px;
   display: inline-block;
   background: var(--accent, #2563eb);
   color: var(--white, #fff);
-  padding: 16px;
+  padding: 14px;
   border-radius: 50%;
   box-shadow: var(--shadow, 0 4px 12px rgba(0,0,0,0.1));
 }
 
+/* Heading */
 .ra-h3 {
-  font-size: clamp(18px, 2.8vw, 22px);
+  font-size: clamp(16px, 4vw, 22px);
   margin: 0 0 8px;
+}
+
+/* Paragraphs inside card */
+.ra-career-card p {
+  font-size: clamp(14px, 3vw, 16px);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Apply Now Button */
+.apply-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #E9692C;
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+  box-shadow: 0 0 10px #fd5f16;
+  animation: glow 1.5s infinite alternate;
+}
+
+.apply-btn:hover {
+  background-color: #ca4f16;
+  box-shadow: 0 0 20px #ff5203;
+}
+
+/* Glowing animation */
+@keyframes glow {
+  0% { box-shadow: 0 0 5px rgba(233,105,44,0.5), 0 0 10px rgba(233,105,44,0.3); }
+  50% { box-shadow: 0 0 15px rgba(233,105,44,0.7), 0 0 25px rgba(233,105,44,0.5); }
+  100% { box-shadow: 0 0 10px rgba(233,105,44,0.6), 0 0 20px rgba(233,105,44,0.4); }
+}
+
+/* Responsive tweaks */
+@media (max-width: 1024px) {
+  .ra-container { padding: 32px 16px; }
+  .ra-grid { gap: 20px; }
+  .ra-career-card { padding: 20px; }
+  .ra-career-icon { font-size: 2rem; padding: 12px; }
+}
+
+@media (max-width: 768px) {
+  .ra-container { padding: 28px 12px; }
+  .ra-grid { gap: 16px; }
+  .ra-career-card { padding: 18px; }
+  .ra-career-icon { font-size: 1.8rem; padding: 10px; }
+  .ra-h3 { font-size: clamp(15px, 5vw, 20px); }
+  .ra-career-card p { font-size: clamp(13px, 4vw, 15px); }
+  .apply-btn { top: 15px; right: 15px; padding: 6px 12px; font-size: 13px; }
+}
+
+@media (max-width: 480px) {
+  .ra-container { padding: 24px 8px; }
+  .ra-grid { gap: 12px; grid-template-columns: 1fr; } /* stack cards */
+  .ra-career-card { padding: 16px; }
+  .ra-career-icon { font-size: 1.6rem; padding: 8px; }
+  .ra-h3 { font-size: clamp(14px, 5vw, 18px); }
+  .ra-career-card p { font-size: clamp(13px, 4vw, 14px); }
+  .apply-btn { top: 10px; right: 10px; padding: 5px 10px; font-size: 12px; }
+}
+.ra-lead{
+  font-size: 12px;
 }
