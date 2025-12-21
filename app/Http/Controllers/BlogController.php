@@ -48,6 +48,9 @@ class BlogController extends Controller
         $blog->title = $request->title;
         $blog->sub_title = $request->sub_title;
         $blog->description = $request->description;
+        $blog->description1 = $request->description1;
+        $blog->description2 = $request->description2;
+        $blog->description3 = $request->description3;
         $blog->blog_date = $request->blog_date;
         $blog->category = $request->category;
         $blog->tags = $request->tags;
@@ -122,6 +125,9 @@ class BlogController extends Controller
         $blog->title = $request->title;
         $blog->sub_title = $request->sub_title;
         $blog->description = $request->description;
+        $blog->description1 = $request->description1;
+        $blog->description2 = $request->description2;
+        $blog->description3 = $request->description3;
         $blog->blog_date = $request->blog_date;
         $blog->category = $request->category;
         $blog->tags = $request->tags;

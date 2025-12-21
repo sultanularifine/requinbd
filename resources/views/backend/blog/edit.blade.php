@@ -97,8 +97,20 @@
 
                                 <!-- Description -->
                                 <div class="form-group mb-0">
-                                    <label><b>Description</b></label>
+                                    <label><b>Description 1</b></label>
                                     <textarea class="form-control summernote" data-height="150" name="description">{{ old('description', $blog->description) }}</textarea>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <label><b>Description 2</b></label>
+                                    <textarea class="form-control summernote" data-height="150" name="description1">{{ old('description1', $blog->description1) }}</textarea>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <label><b>Description 3</b></label>
+                                    <textarea class="form-control summernote" data-height="150" name="description2">{{ old('description2', $blog->description2) }}</textarea>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <label><b>Description 4</b></label>
+                                    <textarea class="form-control summernote" data-height="150" name="description3">{{ old('description3', $blog->description3) }}</textarea>
                                 </div>
 
                             </div>
