@@ -132,4 +132,5 @@
 <script src="{{ asset('backend/library/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
 <script src="{{ asset('backend/library/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 <script src="{{ asset('backend/js/page/index-0.js') }}"></script>
+
 @endpush
