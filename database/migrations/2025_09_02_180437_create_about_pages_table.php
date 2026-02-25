@@ -13,22 +13,22 @@ return new class extends Migration
     {
         Schema::create('about_pages', function (Blueprint $table) {
             $table->id();
-        // Hero section
-        $table->json('hero_images')->nullable(); // store multiple images as JSON
-        $table->string('hero_title')->nullable();
-        $table->string('hero_subtitle')->nullable();
+            // Hero section
+            $table->json('hero_images')->nullable(); // store multiple images as JSON
+            $table->string('hero_title')->nullable();
+            $table->string('hero_subtitle')->nullable();
 
-        // About section
-        $table->text('about_text1')->nullable();
-        $table->text('about_text2')->nullable();
+            // About section
+            $table->text('about_text1')->nullable();
+            $table->text('about_text2')->nullable();
 
-        // Mission & Vision
-        $table->text('mission')->nullable();
-        $table->text('vision')->nullable();
+            // Mission & Vision
+            $table->text('mission')->nullable();
+            $table->text('vision')->nullable();
 
-        
 
-        $table->timestamps();
+
+            $table->timestamps();
         });
     }
 

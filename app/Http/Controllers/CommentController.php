@@ -43,19 +43,18 @@ class CommentController extends Controller
         return redirect()->back()->with('success', 'Comment deleted successfully.');
     }
     // Approve a comment
-public function approve($id)
-{
-    $comment = Comment::findOrFail($id);
+    public function approve($id)
+    {
+        $comment = Comment::findOrFail($id);
 
-    // Only admin or the blog owner can approve
-    if (Auth::user()->role !== 'admin' && $comment->blog->user_id !== Auth::id()) {
-        abort(403, 'Unauthorized');
+        // Only admin or the blog owner can approve
+        if (Auth::user()->role !== 'admin' && $comment->blog->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized');
+        }
+
+        $comment->status = 'approved'; // You can use 'pending' / 'approved'
+        $comment->save();
+
+        return redirect()->back()->with('success', 'Comment approved successfully.');
     }
-
-    $comment->status = 'approved'; // You can use 'pending' / 'approved'
-    $comment->save();
-
-    return redirect()->back()->with('success', 'Comment approved successfully.');
-}
-
 }

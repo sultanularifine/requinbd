@@ -12,12 +12,17 @@ class BlogController extends Controller
     // List all blogs
     public function index()
     {
-        $user = auth()->user();
-        if ($user->role === 'admin') {
+        $user = Auth::user();
+        $role = strtolower($user->role);
+
+        // Super Admin/Admin see all blogs
+        if (in_array($role, ['admin', 'super admin'])) {
             $blogs = Blog::all();
         } else {
+            // Other users see only their blogs
             $blogs = Blog::where('user_id', $user->id)->get();
         }
+
         return view('backend.blog.index', compact('blogs'));
     }
 
@@ -55,7 +60,9 @@ class BlogController extends Controller
         $blog->category = $request->category;
         $blog->tags = $request->tags;
 
+        // Handle thumbnail
         if ($request->hasFile('thumbnail')) {
+            $this->checkAndCreateDir(public_path('backend/thumbnails'));
             $thumbnailFile = $request->file('thumbnail');
             $thumbnailPath = time() . '_' . $thumbnailFile->getClientOriginalName();
             $thumbnailFile->move(public_path('backend/thumbnails'), $thumbnailPath);
@@ -64,7 +71,9 @@ class BlogController extends Controller
 
         $blog->save();
 
+        // Handle multiple images
         if ($request->hasFile('image')) {
+            $this->checkAndCreateDir(public_path('backend/images'));
             foreach ($request->file('image') as $image) {
                 $blogImage = new BlogImage();
                 $blogImage->blog_id = $blog->id;
@@ -82,10 +91,7 @@ class BlogController extends Controller
     public function show($id)
     {
         $blog = Blog::with('blogImage')->findOrFail($id);
-
-        if ($blog->user_id !== Auth::id() && Auth::user()->role !== 'admin') {
-            abort(403, 'Unauthorized');
-        }
+        $this->authorizeAccess($blog);
 
         return view('backend.blog.view', compact('blog'));
     }
@@ -94,10 +100,7 @@ class BlogController extends Controller
     public function edit($id)
     {
         $blog = Blog::findOrFail($id);
-
-        if ($blog->user_id !== Auth::id() && Auth::user()->role !== 'admin') {
-            abort(403, 'Unauthorized');
-        }
+        $this->authorizeAccess($blog);
 
         return view('backend.blog.edit', compact('blog'));
     }
@@ -116,10 +119,7 @@ class BlogController extends Controller
         ]);
 
         $blog = Blog::findOrFail($id);
-
-        if ($blog->user_id !== Auth::id() && Auth::user()->role !== 'admin') {
-            abort(403, 'Unauthorized');
-        }
+        $this->authorizeAccess($blog);
 
         $blog->author = $request->author ?? Auth::user()->name;
         $blog->title = $request->title;
@@ -132,10 +132,12 @@ class BlogController extends Controller
         $blog->category = $request->category;
         $blog->tags = $request->tags;
 
+        // Update thumbnail
         if ($request->hasFile('thumbnail')) {
             if ($blog->thumbnail && file_exists(public_path($blog->thumbnail))) {
                 unlink(public_path($blog->thumbnail));
             }
+            $this->checkAndCreateDir(public_path('backend/thumbnails'));
             $thumbnailFile = $request->file('thumbnail');
             $thumbnailPath = time() . '_' . $thumbnailFile->getClientOriginalName();
             $thumbnailFile->move(public_path('backend/thumbnails'), $thumbnailPath);
@@ -144,6 +146,7 @@ class BlogController extends Controller
 
         $blog->save();
 
+        // Update gallery images
         if ($request->hasFile('image')) {
             $oldImages = BlogImage::where('blog_id', $blog->id)->get();
             foreach ($oldImages as $row) {
@@ -153,6 +156,7 @@ class BlogController extends Controller
                 $row->delete();
             }
 
+            $this->checkAndCreateDir(public_path('backend/images'));
             foreach ($request->file('image') as $image) {
                 $blogImage = new BlogImage();
                 $blogImage->blog_id = $blog->id;
@@ -170,10 +174,7 @@ class BlogController extends Controller
     public function destroy($id)
     {
         $blog = Blog::findOrFail($id);
-
-        if ($blog->user_id !== Auth::id() && Auth::user()->role !== 'admin') {
-            abort(403, 'Unauthorized');
-        }
+        $this->authorizeAccess($blog);
 
         if ($blog->thumbnail && file_exists(public_path($blog->thumbnail))) {
             unlink(public_path($blog->thumbnail));
@@ -192,5 +193,26 @@ class BlogController extends Controller
         return redirect()->route('blog.list')->with('success', 'Blog deleted successfully.');
     }
 
-    
+    /**
+     * Check if the logged-in user can access the blog
+     */
+    private function authorizeAccess(Blog $blog)
+    {
+        $user = Auth::user();
+        $role = strtolower($user->role);
+
+        if ($blog->user_id !== $user->id && !in_array($role, ['admin', 'intern', 'executive'])) {
+            abort(403, 'Unauthorized');
+        }
+    }
+
+    /**
+     * Check if directory exists, if not create it
+     */
+    private function checkAndCreateDir($path)
+    {
+        if (!file_exists($path)) {
+            mkdir($path, 0755, true);
+        }
+    }
 }
